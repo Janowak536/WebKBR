@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "cGvuWjPCk3KYip2ACz9sDisGCJBIpbJeVVkI8YElzcQ=",
+  "Source": "WebKBR.API",
+  "BasePath": "_content/WebKBR.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,15 @@
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\bin\Debug\net7.0\WebKBR.Infrastructure.deps.json
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\bin\Debug\net7.0\WebKBR.Infrastructure.dll
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\bin\Debug\net7.0\WebKBR.Infrastructure.pdb
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\bin\Debug\net7.0\WebKBR.Domain.dll
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\bin\Debug\net7.0\WebKBR.Domain.pdb
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.AssemblyInfo.cs
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.csproj.CopyComplete
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.dll
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\refint\WebKBR.Infrastructure.dll
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\WebKBR.Infrastructure.pdb
+C:\Users\ASUS\Desktop\studia\WebKBR\WebKBR.Infrastructure\obj\Debug\net7.0\ref\WebKBR.Infrastructure.dll

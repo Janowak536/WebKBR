@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WebKBR.API.props" />
+</Project>
