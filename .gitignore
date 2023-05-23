@@ -477,3 +477,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/WebKBR.API/obj/Debug/net7.0/WebKBR.API.GeneratedMSBuildEditorConfig.editorconfig
+/WebKBR.API/obj/Debug/net7.0/WebKBR.API.assets.cache
