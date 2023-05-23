@@ -20,62 +20,114 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Username'),
-              ),
-              TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    await ApiService().login(
-                      _usernameController.text,
-                      _passwordController.text,
-                    );
-                    if (!mounted) return;
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Login successfully')),
-                    );
-                    Provider.of<AuthProvider>(context, listen: false)
-                        .checkLoginStatus();
-                    await navigateWithoutAnimation(context, HomePage());
-                  } catch (e) {
-                    if (!mounted) return;
-                    print(e);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Failed to Login')),
-                    );
-                  }
-                },
-                child: const Text('Login'),
-              ),
-              SizedBox(height: 8),
-              TextButton(
-                onPressed: () async {
-                  await Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                    (route) => false,
-                  );
-                },
-                child: const Text('Sign Up'),
-              ),
-            ],
+      body: Stack(
+        children: [
+          Positioned(
+            top: -50,
+            left: 20,
+            child: Image.asset('assets/logo.png', width: 200, height: 200),
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.grey.shade300,
+                ),
+                padding: EdgeInsets.all(40),
+                margin: EdgeInsets.all(150.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          margin: EdgeInsets.only(bottom: 40),
+                          child: Text(
+                            'Zaloguj',
+                            style: TextStyle(fontSize: 30.0),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white,
+                          ),
+                          padding: EdgeInsets.all(15),
+                          child: TextField(
+                            controller: _usernameController,
+                            decoration: InputDecoration(labelText: 'Username'),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white,
+                          ),
+                          padding: EdgeInsets.all(15),
+                          margin: EdgeInsets.only(top: 20),
+                          child: TextField(
+                            controller: _passwordController,
+                            decoration: InputDecoration(labelText: 'Password'),
+                            obscureText: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          await ApiService().login(
+                            _usernameController.text,
+                            _passwordController.text,
+                          );
+                          if (!mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Login successfully')),
+                          );
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .checkLoginStatus();
+                          await navigateWithoutAnimation(context, HomePage());
+                        } catch (e) {
+                          if (!mounted) return;
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed to Login')),
+                          );
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.orange),
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
+                      ),
+                      child: Text(
+                        'Zaloguj',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () async {
+                        await Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()),
+                          (route) => false,
+                        );
+                      },
+                      child: Text('Sign Up'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

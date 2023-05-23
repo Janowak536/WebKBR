@@ -28,7 +28,7 @@ namespace _2KBR.Controllers
 
         }
         [HttpPost("register")]
-        public ActionResult<User> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserDto request)
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
@@ -38,7 +38,7 @@ namespace _2KBR.Controllers
             return Ok("Registered");
         }
         [HttpPost("login")]
-        public ActionResult<User> Login(UserDto request)
+        public async Task<ActionResult<User>> Login(UserDto request)
         {
             if(user.Email != request.Username)
             {
@@ -49,11 +49,11 @@ namespace _2KBR.Controllers
             {
                 return BadRequest("Wrong password.");
             }
-            string token = CreateToken(user);
+            string token = await CreateToken(user);
 
             return Ok(new { token });
         }
-        private string CreateToken(User user)
+        private async Task<string> CreateToken(User user)
         {
             List<Claim> claims = new List<Claim> { 
                 new Claim(ClaimTypes.Email, user.Email),
