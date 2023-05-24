@@ -24,22 +24,39 @@ namespace WebKBR.API.Controllers
         }
 
 
-        // Registration endpoint
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
             // Check if the email already exists
-            if (_context.Users.Any(user => user.Email == userRegisterDto.Email))
+            if (_context.Users.Any(user => user.Username == userRegisterDto.Username))
             {
                 return BadRequest("Email already exists");
             }
+
             // Hash the password
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegisterDto.Password);
 
+            var client = new Client
+            {
+                Name = userRegisterDto.Name,
+                NIP = userRegisterDto.NIP,
+                Phone = userRegisterDto.Phone,
+                Email = userRegisterDto.Email,
+                Address = userRegisterDto.Address,
+                City = userRegisterDto.City,
+                PostalCode = userRegisterDto.PostalCode,
+                ClientType = userRegisterDto.ClientType,
+                DiscountCode = userRegisterDto.DiscountCode
+            };
+
+            _context.Clients.Add(client);
+            await _context.SaveChangesAsync();
+
             var user = new User
             {
-                Email = userRegisterDto.Email,
-                PasswordHash = hashedPassword
+                Username = userRegisterDto.Username,
+                PasswordHash = hashedPassword,
+                ClientId = client.ClientId  // assuming ClientId is the generated id of the client
             };
 
             _context.Users.Add(user);
@@ -48,11 +65,12 @@ namespace WebKBR.API.Controllers
             return StatusCode(201);
         }
 
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
             // Find the user by email
-            var user = _context.Users.SingleOrDefault(user => user.Email == userLoginDto.Email);
+            var user = _context.Users.SingleOrDefault(user => user.Username == userLoginDto.Username);
 
             if (user == null)
             {
@@ -74,7 +92,7 @@ namespace WebKBR.API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Name, user.Email)
+            new Claim(ClaimTypes.Name, user.Username)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -92,7 +110,7 @@ namespace WebKBR.API.Controllers
         public async Task<IActionResult> ChangePassword(UserChangePasswordDto userChangePasswordDto)
         {
             // Find the user by email
-            var user = _context.Users.SingleOrDefault(user => user.Email == userChangePasswordDto.Email);
+            var user = _context.Users.SingleOrDefault(user => user.Username == userChangePasswordDto.Username);
 
             if (user == null)
             {

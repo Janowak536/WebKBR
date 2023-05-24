@@ -32,7 +32,7 @@ namespace _2KBR.Controllers
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-            user.Email = request.Username;
+            user.Username = request.Username;
             user.PasswordHash = passwordHash;
 
             return Ok("Registered");
@@ -40,7 +40,7 @@ namespace _2KBR.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserDto request)
         {
-            if(user.Email != request.Username)
+            if(user.Username != request.Username)
             {
                 return BadRequest("User not found");
 
@@ -56,7 +56,7 @@ namespace _2KBR.Controllers
         private async Task<string> CreateToken(User user)
         {
             List<Claim> claims = new List<Claim> { 
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Email, user.Username),
                 new Claim(ClaimTypes.Role, "Admin")
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
