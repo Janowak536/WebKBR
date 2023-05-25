@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/pages/client_edit_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
@@ -9,12 +10,14 @@ import 'package:flutter_2kbr/pages/weather_page.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onActionPressed;
 
-  CustomAppBar({required this.onActionPressed});
+  CustomAppBar({
+    required this.onActionPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     final isLoggedIn = context.watch<AuthProvider>().isLoggedIn;
-
+    bool isAdmin = Provider.of<AuthProvider>(context).isAdmin;
     return AppBar(
       titleSpacing: 0,
       elevation: 0,
@@ -35,6 +38,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   iconSize: 35,
                   tooltip: isLoggedIn ? 'Logout' : 'Login',
                 ),
+                if (isAdmin)
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ClientEditPage()),
+                      );
+                    },
+                  ),
               ],
             ),
             SizedBox(height: 8),
@@ -47,9 +62,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Text(
                     'Home',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700),
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 TextButton(
@@ -62,29 +78,38 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       await navigateWithoutAnimation(context, LoginPage());
                     }
                   },
-                  child: Text('Weather',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w700)),
+                  child: Text(
+                    'Weather',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () async =>
                       await navigateWithoutAnimation(context, HomePage()),
-                  child: Text('Front',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w700)),
+                  child: Text(
+                    'Front',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () async =>
                       await navigateWithoutAnimation(context, HomePage()),
-                  child: Text('Parapet',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w700)),
+                  child: Text(
+                    'Parapet',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ],
             ),

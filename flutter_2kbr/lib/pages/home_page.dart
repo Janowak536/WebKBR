@@ -25,9 +25,15 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: CustomAppBar(
-          onActionPressed: () => authProvider.isLoggedIn
-              ? authProvider.logout()
-              : _navigateToLogin(),
+          onActionPressed: () {
+            final authProvider =
+                Provider.of<AuthProvider>(context, listen: false);
+            if (authProvider.isLoggedIn) {
+              authProvider.logout();
+            } else {
+              _navigateToLogin();
+            }
+          },
         ),
         body: Center(
           child: Column(

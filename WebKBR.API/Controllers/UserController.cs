@@ -156,6 +156,33 @@ namespace WebKBR.API.Controllers
 
             return Ok(new { IsAdmin = isAdmin });
         }
+        [HttpPut("EditClientDetails")]
+        public async Task<IActionResult> EditClientDetails(ClientEditDto clientEditDto)
+        {
+            var client = await _context.Clients.FindAsync(clientEditDto.ClientId);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            client.ClientType = clientEditDto.ClientType;
+            client.DiscountCode = clientEditDto.DiscountCode;
+
+            _context.Entry(client).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return NoContent();
+        }
+
 
     }
 }
