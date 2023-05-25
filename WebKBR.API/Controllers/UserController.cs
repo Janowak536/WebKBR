@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebKBR.API.Controllers
 {
@@ -92,7 +94,8 @@ namespace WebKBR.API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Name, user.Username)
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Role, user.Role)  // Add this line
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -103,7 +106,6 @@ namespace WebKBR.API.Controllers
             // Return the token to the client
             return Ok(new { Token = tokenString });
         }
-
 
         // Change password endpoint
         [HttpPost("ChangePassword")]
@@ -132,5 +134,28 @@ namespace WebKBR.API.Controllers
 
             return Ok();
         }
+        [HttpGet("IsAdmin")]
+        [Authorize]
+        public async Task<IActionResult> IsAdmin()
+        {
+            var username = User.Identity?.Name;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var isAdmin = user.Role == "admin";
+
+            return Ok(new { IsAdmin = isAdmin });
+        }
+
     }
 }

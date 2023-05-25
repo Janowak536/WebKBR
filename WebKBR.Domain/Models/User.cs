@@ -12,4 +12,5 @@ public partial class User
     public int? ClientId { get; set; }
 
     public virtual Client? Client { get; set; }
+    public string Role { get; set; } = "client";
 }

@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebKBR.API.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "admin")]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {

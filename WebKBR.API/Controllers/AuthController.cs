@@ -28,7 +28,7 @@ namespace _2KBR.Controllers
 
         }
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserLoginDto request)
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
@@ -38,7 +38,7 @@ namespace _2KBR.Controllers
             return Ok("Registered");
         }
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserDto request)
+        public async Task<ActionResult<User>> Login(UserLoginDto request)
         {
             if(user.Username != request.Username)
             {

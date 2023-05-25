@@ -36,7 +36,8 @@ CREATE TABLE Users (
     Username NVARCHAR(256) NOT NULL UNIQUE,
     PasswordHash NVARCHAR(MAX) NOT NULL,
     ClientID INT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID)
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+	Role NVARCHAR(20),
 );
 
 
