@@ -30,9 +30,6 @@ class _HomePageState extends State<HomePage> {
                 Provider.of<AuthProvider>(context, listen: false);
             if (authProvider.isLoggedIn) {
               authProvider.logout();
-              navigateWithoutAnimation(context, HomePage());
-            } else {
-              _navigateToLogin();
             }
           },
         ),
@@ -53,16 +50,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  void _navigateToLogin() {
-    Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) => LoginPage(),
-          transitionDuration: Duration(seconds: 0),
-        )).then((_) {
-      setState(() {});
-    });
   }
 }

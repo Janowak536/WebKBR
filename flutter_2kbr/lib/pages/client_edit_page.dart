@@ -27,12 +27,6 @@ class _ClientEditPageState extends State<ClientEditPage> {
               Provider.of<AuthProvider>(context, listen: false);
           if (authProvider.isLoggedIn) {
             authProvider.logout();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          } else {
-            _navigateToLogin();
           }
         },
       ),
@@ -90,16 +84,5 @@ class _ClientEditPageState extends State<ClientEditPage> {
         ),
       ),
     );
-  }
-
-  void _navigateToLogin() {
-    Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation1, animation2) => LoginPage(),
-          transitionDuration: Duration(seconds: 0),
-        )).then((_) {
-      setState(() {});
-    });
   }
 }

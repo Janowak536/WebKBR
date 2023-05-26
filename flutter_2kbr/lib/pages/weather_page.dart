@@ -45,14 +45,10 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       appBar: CustomAppBar(
         onActionPressed: () {
+          final authProvider =
+              Provider.of<AuthProvider>(context, listen: false);
           if (authProvider.isLoggedIn) {
             authProvider.logout();
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          } else {
-            _navigateToLogin();
           }
         },
       ),
@@ -104,14 +100,5 @@ class _WeatherPageState extends State<WeatherPage> {
               ),
       ),
     );
-  }
-
-  Future<void> _navigateToLogin() {
-    return Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-    ).then((_) {
-      setState(() {});
-    });
   }
 }

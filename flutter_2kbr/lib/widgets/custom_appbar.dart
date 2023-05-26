@@ -39,7 +39,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         context, ClientEditPage()),
                   ),
                 IconButton(
-                  onPressed: onActionPressed,
+                  onPressed: () {
+                    final authProvider =
+                        Provider.of<AuthProvider>(context, listen: false);
+                    if (authProvider.isLoggedIn) {
+                      authProvider.logout();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => HomePage()),
+                        (Route<dynamic> route) => false,
+                      );
+                    } else {
+                      _navigateToLogin(context);
+                    }
+                  },
                   icon: Icon(isLoggedIn ? Icons.logout : Icons.login),
                   color: Colors.white,
                   iconSize: 35,
@@ -110,6 +124,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => LoginPage(),
+        transitionDuration: Duration(seconds: 0),
       ),
     );
   }
