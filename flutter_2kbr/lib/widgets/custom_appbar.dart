@@ -44,11 +44,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         Provider.of<AuthProvider>(context, listen: false);
                     if (authProvider.isLoggedIn) {
                       authProvider.logout();
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => HomePage()),
-                        (Route<dynamic> route) => false,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              HomePage(),
+                          transitionDuration: Duration(seconds: 0),
+                        ),
                       );
                     } else {
                       _navigateToLogin(context);
@@ -139,5 +141,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight * 2);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight * 2.6);
 }

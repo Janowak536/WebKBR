@@ -10,8 +10,6 @@ class UserRegisterDto {
   String address;
   String city;
   String postalCode;
-  String clientType;
-  String discountCode;
 
   UserRegisterDto({
     required this.username,
@@ -25,8 +23,6 @@ class UserRegisterDto {
     required this.address,
     required this.city,
     required this.postalCode,
-    required this.clientType,
-    required this.discountCode,
   });
 
   Map<String, dynamic> toJson() => {
@@ -41,7 +37,5 @@ class UserRegisterDto {
         'Address': address,
         'City': city,
         'PostalCode': postalCode,
-        'ClientType': clientType,
-        'DiscountCode': discountCode,
       };
 }

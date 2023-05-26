@@ -8,7 +8,7 @@ create table Clients (
 	City varchar(20),
 	postalCode char(6),
 	clientType varchar(20),
-	discountCode varchar(20) UNIQUE,
+	discountCode varchar(20),
 )
 
 CREATE table Models (

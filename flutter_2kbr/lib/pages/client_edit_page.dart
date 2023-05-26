@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
-import 'package:flutter_2kbr/pages/home_page.dart';
-import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +10,7 @@ class ClientEditPage extends StatefulWidget {
 }
 
 class _ClientEditPageState extends State<ClientEditPage> {
-  final TextEditingController _clientIdController = TextEditingController();
+  final TextEditingController _nipController = TextEditingController();
   final TextEditingController _clientTypeController = TextEditingController();
   final TextEditingController _discountCodeController = TextEditingController();
 
@@ -35,10 +33,10 @@ class _ClientEditPageState extends State<ClientEditPage> {
         child: Column(
           children: <Widget>[
             TextField(
-              controller: _clientIdController,
+              controller: _nipController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Client Id',
+                labelText: 'Nip',
               ),
             ),
             SizedBox(height: 10),
@@ -60,15 +58,12 @@ class _ClientEditPageState extends State<ClientEditPage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                // Implement your logic to edit client details
-                print('Client Id: ${_clientIdController.text}');
+                print('NIP: ${_nipController.text}');
                 print('Client Type: ${_clientTypeController.text}');
                 print('Discount Code: ${_discountCodeController.text}');
-
-                // Add these lines
                 try {
                   await apiClient.editClientDetails(
-                      int.parse(_clientIdController.text),
+                      int.parse(_nipController.text),
                       _clientTypeController.text,
                       _discountCodeController.text);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

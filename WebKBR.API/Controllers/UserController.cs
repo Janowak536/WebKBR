@@ -159,7 +159,7 @@ namespace WebKBR.API.Controllers
         [HttpPut("EditClientDetails")]
         public async Task<IActionResult> EditClientDetails(ClientEditDto clientEditDto)
         {
-            var client = await _context.Clients.FindAsync(clientEditDto.NIP);
+            var client = await _context.Clients.Where(c => c.NIP == clientEditDto.NIP.ToString()).FirstOrDefaultAsync();
 
             if (client == null)
             {

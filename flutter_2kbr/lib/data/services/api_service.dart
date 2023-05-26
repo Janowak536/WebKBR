@@ -107,7 +107,7 @@ class ApiService {
   }
 
   Future<void> editClientDetails(
-      int clientId, String clientType, String discountCode) async {
+      int nip, String clientType, String discountCode) async {
     final String baseUrl = 'https://localhost:7027';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
@@ -122,7 +122,7 @@ class ApiService {
         'Authorization': 'Bearer $jwt',
       },
       body: jsonEncode({
-        'ClientId': clientId,
+        'NIP': nip,
         'ClientType': clientType,
         'DiscountCode': discountCode,
       }),

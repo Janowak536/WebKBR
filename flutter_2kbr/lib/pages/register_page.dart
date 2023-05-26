@@ -90,20 +90,17 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (_passwordController.text ==
                       _confirmPasswordController.text) {
                     UserRegisterDto dto = UserRegisterDto(
-                      username: _usernameController.text,
-                      password: _passwordController.text,
-                      confirmPassword: _confirmPasswordController.text,
-                      clientId: int.tryParse(_clientIdController.text) ?? 0,
-                      name: _nameController.text,
-                      nip: _nipController.text,
-                      phone: _phoneController.text,
-                      email: _emailController.text,
-                      address: _addressController.text,
-                      city: _cityController.text,
-                      postalCode: _postalCodeController.text,
-                      clientType: _clientTypeController.text,
-                      discountCode: _discountCodeController.text,
-                    );
+                        username: _usernameController.text,
+                        password: _passwordController.text,
+                        confirmPassword: _confirmPasswordController.text,
+                        clientId: int.tryParse(_clientIdController.text) ?? 0,
+                        name: _nameController.text,
+                        nip: _nipController.text,
+                        phone: _phoneController.text,
+                        email: _emailController.text,
+                        address: _addressController.text,
+                        city: _cityController.text,
+                        postalCode: _postalCodeController.text);
                     try {
                       await ApiService().register(dto);
                       ScaffoldMessenger.of(context).showSnackBar(
