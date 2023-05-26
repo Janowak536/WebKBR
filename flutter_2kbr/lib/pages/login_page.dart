@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white,
                           ),
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(top: 20),
                           child: TextField(
                             controller: _passwordController,

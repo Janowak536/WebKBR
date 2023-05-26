@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
                 Provider.of<AuthProvider>(context, listen: false);
             if (authProvider.isLoggedIn) {
               authProvider.logout();
+              navigateWithoutAnimation(context, HomePage());
             } else {
               _navigateToLogin();
             }

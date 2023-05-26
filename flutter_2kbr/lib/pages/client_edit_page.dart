@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
+import 'package:flutter_2kbr/pages/home_page.dart';
+import 'package:flutter_2kbr/pages/login_page.dart';
+import 'package:flutter_2kbr/providers/auth_provider.dart';
+import 'package:flutter_2kbr/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
 class ClientEditPage extends StatefulWidget {
   @override
@@ -16,8 +21,20 @@ class _ClientEditPageState extends State<ClientEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Edit Client Details'),
+      appBar: CustomAppBar(
+        onActionPressed: () {
+          final authProvider =
+              Provider.of<AuthProvider>(context, listen: false);
+          if (authProvider.isLoggedIn) {
+            authProvider.logout();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          } else {
+            _navigateToLogin();
+          }
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -73,5 +90,16 @@ class _ClientEditPageState extends State<ClientEditPage> {
         ),
       ),
     );
+  }
+
+  void _navigateToLogin() {
+    Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => LoginPage(),
+          transitionDuration: Duration(seconds: 0),
+        )).then((_) {
+      setState(() {});
+    });
   }
 }

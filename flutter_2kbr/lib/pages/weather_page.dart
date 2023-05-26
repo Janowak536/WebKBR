@@ -47,7 +47,6 @@ class _WeatherPageState extends State<WeatherPage> {
         onActionPressed: () {
           if (authProvider.isLoggedIn) {
             authProvider.logout();
-            // navigate to home page after logging out
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomePage()),

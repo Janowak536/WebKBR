@@ -31,6 +31,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 SizedBox(width: 8),
                 Expanded(child: Image.asset('assets/logo.png', height: 60)),
+                if (isAdmin)
+                  IconButton(
+                    color: Colors.white,
+                    icon: Icon(Icons.edit),
+                    onPressed: () async => await navigateWithoutAnimation(
+                        context, ClientEditPage()),
+                  ),
                 IconButton(
                   onPressed: onActionPressed,
                   icon: Icon(isLoggedIn ? Icons.logout : Icons.login),
@@ -38,18 +45,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   iconSize: 35,
                   tooltip: isLoggedIn ? 'Logout' : 'Login',
                 ),
-                if (isAdmin)
-                  IconButton(
-                    color: Colors.white,
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ClientEditPage()),
-                      );
-                    },
-                  ),
               ],
             ),
             SizedBox(height: 8),

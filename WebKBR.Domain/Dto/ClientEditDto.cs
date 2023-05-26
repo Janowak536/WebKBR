@@ -8,7 +8,7 @@ namespace WebKBR.Domain.Dto
 {
     public class ClientEditDto
     {
-        public int ClientId { get; set; }
+        public int NIP { get; set; }
         public string ClientType { get; set; }
         public string DiscountCode { get; set; }
     }
