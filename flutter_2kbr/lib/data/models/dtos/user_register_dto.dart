@@ -2,7 +2,6 @@ class UserRegisterDto {
   String username;
   String password;
   String confirmPassword;
-  int clientId;
   String name;
   String nip;
   String phone;
@@ -15,7 +14,6 @@ class UserRegisterDto {
     required this.username,
     required this.password,
     required this.confirmPassword,
-    required this.clientId,
     required this.name,
     required this.nip,
     required this.phone,
@@ -29,7 +27,6 @@ class UserRegisterDto {
         'Username': username,
         'Password': password,
         'ConfirmPassword': confirmPassword,
-        'ClientId': clientId,
         'Name': name,
         'NIP': nip,
         'Phone': phone,
