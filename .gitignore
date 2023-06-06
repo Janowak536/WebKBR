@@ -479,3 +479,8 @@ $RECYCLE.BIN/
 *.lnk
 /WebKBR.API/obj/Debug/net7.0/WebKBR.API.GeneratedMSBuildEditorConfig.editorconfig
 /WebKBR.API/obj/Debug/net7.0/WebKBR.API.assets.cache
+/WebKBR.API/obj/Debug/net7.0/WebKBR.API.csproj.AssemblyReference.cache
+/WebKBR.Domain/obj/Debug/net7.0/WebKBR.Domain.assets.cache
+/WebKBR.Domain/obj/Debug/net7.0/WebKBR.Domain.GeneratedMSBuildEditorConfig.editorconfig
+WebKBR.API/bin/Debug/net7.0/WebKBR.API.dll
+/WebKBR.API/bin/Debug/net7.0/WebKBR.API.dll
