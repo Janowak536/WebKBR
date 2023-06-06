@@ -29,7 +29,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(width: 8),
-                Expanded(child: Image.asset('assets/logo.png', height: 60)),
+                Expanded(
+                    child: Image.asset('assets/images/logo.png', height: 60)),
                 IconButton(
                   onPressed: onActionPressed,
                   icon: Icon(isLoggedIn ? Icons.logout : Icons.login),

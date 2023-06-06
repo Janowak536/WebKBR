@@ -44,40 +44,47 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: const Text('Fetch Weather Forecast'),
                     )
-                  : SizedBox(
-                      height: 0,
-                    ), // Remove spacing between the button and tiles
-              TextButton(
-                onPressed: () async =>
-                    await navigateWithoutAnimation(context, FrontyPage()),
-                child: Container(
-                  padding: EdgeInsets.only(top: 0),
-                  margin: EdgeInsets.only(top: 0),
-                  color: const Color.fromARGB(255, 151, 208, 255),
-                  height: 250,
-                  child: Center(
-                    child: Text(
-                      'Fronty',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
+                  // Remove spacing between the button and tiles
+                  : TextButton(
+                      onPressed: () async =>
+                          await navigateWithoutAnimation(context, FrontyPage()),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                AssetImage('assets/images/fronty_header.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 250,
+                        child: Center(
+                          child: Text(
+                            'Fronty',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 0), // Remove spacing between the tiles
+              SizedBox(height: 50), // Spacing between the tiles
               TextButton(
                 onPressed: () async =>
                     await navigateWithoutAnimation(context, ParapetyPage()),
                 child: Container(
-                  color: const Color.fromARGB(255, 127, 244, 131),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/parapety_header2.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   height: 250,
                   child: Center(
                     child: Text(
                       'Parapety',
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 20,
                       ),
                     ),
