@@ -25,8 +25,23 @@ class _LoginPageState extends State<LoginPage> {
           Positioned(
             top: -50,
             left: 20,
-            child:
-                Image.asset('assets/images/logo.png', width: 200, height: 200),
+            child: GestureDetector(
+              onTap: () async {
+                await Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        HomePage(),
+                    transitionDuration: Duration(seconds: 0),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return child;
+                    },
+                  ),
+                  (route) => false,
+                );
+              },
+              child: Image.asset('assets/logo.png', width: 200, height: 200),
+            ),
           ),
           Center(
             child: Padding(
