@@ -43,7 +43,7 @@ public partial class Db2KbrContext : DbContext
 
             entity.HasIndex(e => e.Email, "UQ__Clients__A9D1053475D1B40B").IsUnique();
 
-            entity.HasIndex(e => e.Nip, "UQ__Clients__C7DEC3C6E1EC6C28").IsUnique();
+            entity.HasIndex(e => e.NIP, "UQ__Clients__C7DEC3C6E1EC6C28").IsUnique();
 
             entity.Property(e => e.ClientId).HasColumnName("clientID");
             entity.Property(e => e.Address)
@@ -66,7 +66,7 @@ public partial class Db2KbrContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Nip)
+            entity.Property(e => e.NIP)
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsFixedLength()
@@ -207,7 +207,7 @@ public partial class Db2KbrContext : DbContext
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
-            entity.Property(e => e.Email).HasMaxLength(256);
+            entity.Property(e => e.Username).HasMaxLength(256);
 
             entity.HasOne(d => d.Client).WithMany(p => p.Users)
                 .HasForeignKey(d => d.ClientId)
