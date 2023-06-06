@@ -32,14 +32,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(width: 8),
-                Expanded(child: Image.asset('assets/logo.png', height: 60)),
-                if (isAdmin)
-                  IconButton(
-                    color: Colors.white,
-                    icon: Icon(Icons.edit),
-                    onPressed: () async => await navigateWithoutAnimation(
-                        context, ClientEditPage()),
-                  ),
+
+                Expanded(
+                    child: Image.asset('assets/images/logo.png', height: 60)),
                 IconButton(
                   onPressed: () {
                     final authProvider =
