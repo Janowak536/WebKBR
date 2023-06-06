@@ -25,7 +25,23 @@ class _LoginPageState extends State<LoginPage> {
           Positioned(
             top: -50,
             left: 20,
-            child: Image.asset('assets/logo.png', width: 200, height: 200),
+            child: GestureDetector(
+              onTap: () async {
+                await Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        HomePage(),
+                    transitionDuration: Duration(seconds: 0),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return child;
+                    },
+                  ),
+                  (route) => false,
+                );
+              },
+              child: Image.asset('assets/logo.png', width: 200, height: 200),
+            ),
           ),
           Center(
             child: Padding(
@@ -67,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white,
                           ),
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.all(10),
                           margin: EdgeInsets.only(top: 20),
                           child: TextField(
                             controller: _passwordController,
@@ -81,16 +97,19 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: () async {
                         try {
-                          await ApiService().login(
+                          String jwt = await ApiService().login(
                             _usernameController.text,
                             _passwordController.text,
                           );
+                          bool isAdmin = await ApiService().isAdmin();
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .isAdmin = isAdmin;
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .toggleLoginStatus();
                           if (!mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Login successfully')),
                           );
-                          Provider.of<AuthProvider>(context, listen: false)
-                              .checkLoginStatus();
                           await navigateWithoutAnimation(context, HomePage());
                         } catch (e) {
                           if (!mounted) return;

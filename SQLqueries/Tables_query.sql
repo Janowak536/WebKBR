@@ -1,20 +1,14 @@
 create table Clients (
 	clientID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Name varchar(50),
-	NIP char(10) UNIQUE,
-	Phone char(11) UNIQUE,
-	Email varchar(100) UNIQUE,
+	NIP char(10) ,
+	Phone char(11) ,
+	Email varchar(100),
 	Address varchar(100),
 	City varchar(20),
 	postalCode char(6),
 	clientType varchar(20),
-	discountCode varchar(20) UNIQUE,
-	CONSTRAINT [CHK_NIP]
-	CHECK (NOT [NIP] like '%[^0-9]%'),
-	CONSTRAINT [CHK_Phone]
-	CHECK (NOT [Phone] like '+%[0-9]%'),
-	CONSTRAINT [CHK_pCode]  
-    CHECK ([postalCode] like '[0-9][0-9]-[0-9][0-9][0-9]')
+	discountCode varchar(20),
 )
 
 CREATE table Models (
@@ -39,10 +33,11 @@ CREATE table MDF (
 )
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
-    Email NVARCHAR(256) NOT NULL,
+    Username NVARCHAR(256) NOT NULL UNIQUE,
     PasswordHash NVARCHAR(MAX) NOT NULL,
     ClientID INT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID)
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+	Role NVARCHAR(20),
 );
 
 
