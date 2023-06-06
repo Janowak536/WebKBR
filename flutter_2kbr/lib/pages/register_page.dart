@@ -48,7 +48,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   (route) => false,
                 );
               },
-              child: Image.asset('assets/logo.png', width: 200, height: 200),
+              child: Image.asset('assets/images/logo.png',
+                  width: 200, height: 200),
             ),
           ),
           Center(
