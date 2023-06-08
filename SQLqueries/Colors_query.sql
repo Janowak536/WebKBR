@@ -14,9 +14,6 @@ INSERT INTO Colors
 VALUES (33, 'D¹b Czarny', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (33, 'D¹b Czarny', 'Drewnopodobna', 0.00)
-
-INSERT INTO Colors
 VALUES (46, 'Fino Bronze', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
