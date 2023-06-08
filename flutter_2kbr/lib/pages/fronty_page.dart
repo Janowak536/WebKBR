@@ -26,8 +26,8 @@ class _FrontyPageState extends State<FrontyPage> {
 
     var size = MediaQuery.of(context).size;
     final double horizontalPadding = size.width > 800
-        ? size.width * 0.3
-        : 0.0; // Update this value as you need.
+        ? size.width * 0.2
+        : 0.9; // Update this value as you need.
 
     return WillPopScope(
         onWillPop: () async => false,
