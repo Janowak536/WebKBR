@@ -64,6 +64,8 @@ flutter:
     - assets/images/parapety_header2.jpg
     - assets/images/parapety_header.jpg
     - assets/images/stolarz.jpg
+    - assets/images/kuchnia_home.jpg
+    - assets/images/parapet_offer.jpeg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

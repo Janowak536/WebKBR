@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
+import 'package:flutter_2kbr/pages/offer_page.dart';
 import 'package:flutter_2kbr/pages/weather_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart'; // Import CustomAppBar
@@ -37,65 +38,80 @@ class _HomePageState extends State<HomePage> {
             }
           },
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              authProvider.isLoggedIn
-                  ? ElevatedButton(
-                      onPressed: () {
-                        navigateWithoutAnimation(context, WeatherPage());
-                      },
-                      child: const Text('Fetch Weather Forecast'),
-                    )
-                  // Remove spacing between the button and tiles
-                  : TextButton(
-                      onPressed: () async =>
-                          await navigateWithoutAnimation(context, FrontyPage()),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/fronty_header.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        height: 250,
-                        child: Center(
-                          child: Text(
-                            'Fronty',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-              SizedBox(height: 50), // Spacing between the tiles
-              TextButton(
-                onPressed: () async =>
-                    await navigateWithoutAnimation(context, ParapetyPage()),
-                child: Container(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/parapety_header2.jpg'),
+                      image: AssetImage('assets/images/klasyczna.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  height: 250,
-                  child: Center(
-                    child: Text(
-                      'Parapety',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
+                  height: 350,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Dom tworzą ludzie',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'oraz meble...',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              navigateWithoutAnimation(context, OfferPage());
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.orange),
+                            ),
+                            child: const Text('Zobacz ofertę'),
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Column(
+                  children: [
+                    Text(
+                      'dsad',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    Text(
+                      'dasd',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/pages/client_edit_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
+import 'package:flutter_2kbr/pages/offer_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
@@ -83,17 +84,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () async {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                    final isLoggedIn = context.read<AuthProvider>().isLoggedIn;
-                    if (isLoggedIn) {
-                      await navigateWithoutAnimation(context, WeatherPage());
-                    } else {
-                      await navigateWithoutAnimation(context, LoginPage());
-                    }
-                  },
+                  onPressed: () async =>
+                      await navigateWithoutAnimation(context, OfferPage()),
                   child: Text(
-                    'Weather',
+                    'Oferta',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
