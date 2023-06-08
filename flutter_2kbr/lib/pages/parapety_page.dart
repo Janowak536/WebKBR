@@ -24,6 +24,9 @@ class _ParapetyPageState extends State<ParapetyPage> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
+    var size = MediaQuery.of(context).size;
+    final double horizontalPadding = size.width > 800 ? size.width * 0.2 : 0.9;
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -32,7 +35,87 @@ class _ParapetyPageState extends State<ParapetyPage> {
               ? authProvider.logout()
               : _navigateToLogin(),
         ),
-        body: Center(child: Text('Parapety Page Content')),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'Poniższe parapety są dostępne w różnorodnej kolorystyce',
+                style: TextStyle(
+                  color: Color.fromARGB(164, 164, 164, 164),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: GridView.count(
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/parapet_b.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      padding: const EdgeInsets.all(8),
+                      child: const Text("Wykończenie B"),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/parapet_c.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Text('Wykończenie C'),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/parapet_e.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Text('Wykończenie E'),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/parapet_g.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Text('Wykończenie G'),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/parapet_i.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: const Text('Wykończenie I'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

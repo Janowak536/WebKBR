@@ -61,35 +61,65 @@ class _FrontyPageState extends State<FrontyPage> {
                     crossAxisCount: 3,
                     children: <Widget>[
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         height: MediaQuery.of(context).size.height * 0.8,
                         width: MediaQuery.of(context).size.width * 0.6,
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[100],
                         child: const Text("He'd have you all unravel at the"),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[200],
                         child: const Text('Heed not the rabble'),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[300],
                         child: const Text('Sound of screams but the'),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[400],
                         child: const Text('Who scream'),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[500],
                         child: const Text('Revolution is coming...'),
                       ),
                       Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/parapet_b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(8),
-                        color: Colors.teal[600],
                         child: const Text('Revolution, they...'),
                       ),
                     ],

@@ -57,13 +57,18 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/
-    - assets/images/logo.png
-    - assets/images/klasyczna.jpg
-    - assets/images/fronty_header.png
-    - assets/images/parapety_header2.jpg
-    - assets/images/parapety_header.jpg
-    - assets/images/stolarz.jpg
+   - assets/
+   - assets/images/logo.png
+   - assets/images/klasyczna.jpg
+   - assets/images/fronty_header.png
+   - assets/images/parapety_header2.jpg
+   - assets/images/parapety_header.jpg
+   - assets/images/stolarz.jpg
+   - assets/images/parapet_b.jpg
+   - assets/images/parapet_c.jpg
+   - assets/images/parapet_e.jpg
+   - assets/images/parapet_g.jpg
+   - assets/images/parapet_i.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
