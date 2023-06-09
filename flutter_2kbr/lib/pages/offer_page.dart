@@ -1,8 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_2kbr/pages/login_page.dart';
-import 'package:flutter_2kbr/pages/weather_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
@@ -40,50 +36,51 @@ class _OfferPageState extends State<OfferPage> {
         body: Column(
           children: [
             Expanded(
-                child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/parapet_offer.jpeg'),
-                  fit: BoxFit.cover,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/parapet_offer.jpeg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      left: 30,
+                      top: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Parapety',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 30,
+                      bottom: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            navigateWithoutAnimation(context, ParapetyPage());
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.orange),
+                          ),
+                          child: Text('Kofiguruj'),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Stack(
-                children: <Widget>[
-                  Positioned(
-                    left: 30,
-                    top: 30,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        'Parapety',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 30,
-                    bottom: 30,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          navigateWithoutAnimation(context, ParapetyPage());
-                        },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.orange),
-                        ),
-                        child: Text('Kofiguruj'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )),
+            ),
             Expanded(
                 child: Container(
               decoration: BoxDecoration(

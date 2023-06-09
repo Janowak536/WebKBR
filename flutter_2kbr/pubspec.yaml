@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.1
+  google_maps: ^6.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,7 +65,6 @@ flutter:
     - assets/images/parapety_header2.jpg
     - assets/images/parapety_header.jpg
     - assets/images/stolarz.jpg
-    - assets/images/kuchnia_home.jpg
     - assets/images/parapet_offer.jpeg
   # To add assets to your application, add an assets section, like this:
   # assets:
