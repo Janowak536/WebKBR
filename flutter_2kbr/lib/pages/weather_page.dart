@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/weather_forecast.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
-import 'package:flutter_2kbr/pages/home_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/pages/client_edit_page.dart';
+import 'package:flutter_2kbr/pages/contact_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
-import 'package:flutter_2kbr/pages/weather_page.dart';
 import 'package:flutter_2kbr/pages/fronty_page.dart';
-import 'package:flutter_2kbr/pages/parapety_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onActionPressed;
@@ -75,7 +74,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () async =>
                       await navigateWithoutAnimation(context, HomePage()),
                   child: Text(
-                    'Home',
+                    'Strona główna',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,
@@ -106,8 +105,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 TextButton(
                   onPressed: () async =>
-                      await navigateWithoutAnimation(context, ParapetyPage()),
-                  child: Text('Parapety',
+                      await navigateWithoutAnimation(context, ContactPage()),
+                  child: Text('Kontakt',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
