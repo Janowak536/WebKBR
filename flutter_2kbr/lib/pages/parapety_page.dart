@@ -61,7 +61,7 @@ class _ParapetyPageState extends State<ParapetyPage> {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/parapet_b.jpg'),
+                          image: AssetImage('assets/parapety/parapet_b.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -73,7 +73,7 @@ class _ParapetyPageState extends State<ParapetyPage> {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/parapet_c.jpg'),
+                          image: AssetImage('assets/parapety/parapet_c.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -83,7 +83,7 @@ class _ParapetyPageState extends State<ParapetyPage> {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/parapet_e.jpg'),
+                          image: AssetImage('assets/parapety/parapet_e.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -93,7 +93,7 @@ class _ParapetyPageState extends State<ParapetyPage> {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/parapet_g.jpg'),
+                          image: AssetImage('assets/parapety/parapet_g.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -103,7 +103,7 @@ class _ParapetyPageState extends State<ParapetyPage> {
                     Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/parapet_i.jpg'),
+                          image: AssetImage('assets/parapety/parapet_i.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
