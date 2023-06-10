@@ -34,7 +34,6 @@ class _FrontPatternPageState extends State<FrontPatternPage> {
       Wzor(name: "ANDROS 35", image: 'assets/fronty/ANDROS_035.jpg'),
       Wzor(name: "ANSE", image: 'assets/fronty/ANSE_238.jpg'),
       Wzor(name: "BARI", image: 'assets/fronty/BARI_56.jpg'),
-      // Dodaj więcej wzorów
     ];
 
     return WillPopScope(
@@ -59,7 +58,7 @@ class _FrontPatternPageState extends State<FrontPatternPage> {
                   Order order = Order(
                     pattern: patterns[index].name,
                     color: '',
-                    thickness: 0,
+                    thickness: 2, // setting a valid initial thickness
                     height: 0,
                     width: 0,
                   );

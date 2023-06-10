@@ -17,16 +17,15 @@ class SillColorPage extends StatefulWidget {
 }
 
 class _SillColorPageState extends State<SillColorPage> {
-  String selectedColor = '';
-
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final List<ColorModel> colors = [
       ColorModel(name: "Czerwony", image: 'assets/colors/red.jpg'),
       ColorModel(name: "Niebieski", image: 'assets/colors/blue.jpg'),
-      // Dodaj więcej kolorów
+      // Add more colors
     ];
+
     var size = MediaQuery.of(context).size;
     final double horizontalPadding = size.width > 800 ? size.width * 0.2 : 0.9;
 
@@ -66,9 +65,19 @@ class _SillColorPageState extends State<SillColorPage> {
                   itemBuilder: (BuildContext ctx, index) {
                     return GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedColor = colors[index].name;
-                        });
+                        final updatedOrder =
+                            widget.order.copyWith(color: colors[index].name);
+                        Navigator.of(context).pushReplacement(
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    SillSizePage(order: updatedOrder),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return child; // This disables the transition
+                            },
+                          ),
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -81,9 +90,9 @@ class _SillColorPageState extends State<SillColorPage> {
                         child: Text(
                           colors[index].name,
                           style: TextStyle(
-                            color: selectedColor == colors[index].name
-                                ? Colors.white
-                                : Colors.black,
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -91,21 +100,6 @@ class _SillColorPageState extends State<SillColorPage> {
                   },
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: selectedColor.isNotEmpty
-                  ? () {
-                      final updatedOrder =
-                          widget.order.copyWith(color: selectedColor);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              SillSizePage(order: updatedOrder),
-                        ),
-                      );
-                    }
-                  : null,
-              child: Text('Dalej'),
             ),
           ],
         ),
