@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/pages/sills/sill_pattern_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_2kbr/pages/fronty_page.dart';
+import 'package:flutter_2kbr/pages/fronts/front_pattern_page.dart';
 import 'package:flutter_2kbr/pages/parapety_page.dart';
 
 class OfferPage extends StatefulWidget {
@@ -67,7 +68,8 @@ class _OfferPageState extends State<OfferPage> {
                         padding: EdgeInsets.all(16.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            navigateWithoutAnimation(context, ParapetyPage());
+                            navigateWithoutAnimation(
+                                context, SillPatternPage());
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -113,7 +115,7 @@ class _OfferPageState extends State<OfferPage> {
                       padding: EdgeInsets.all(16.0),
                       child: ElevatedButton(
                         onPressed: () {
-                          navigateWithoutAnimation(context, FrontyPage());
+                          navigateWithoutAnimation(context, FrontPatternPage());
                         },
                         style: ButtonStyle(
                           backgroundColor:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_2kbr/pages/client_edit_page.dart';
+import 'package:flutter_2kbr/pages/admin/client_edit_page.dart';
 import 'package:flutter_2kbr/pages/contact_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
-import 'package:flutter_2kbr/pages/fronty_page.dart';
+import 'package:flutter_2kbr/pages/fronts/front_pattern_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onActionPressed;
@@ -21,6 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isLoggedIn = context.watch<AuthProvider>().isLoggedIn;
     bool isAdmin = Provider.of<AuthProvider>(context).isAdmin;
     return AppBar(
+      automaticallyImplyLeading: false,
       titleSpacing: 0,
       elevation: 0,
       flexibleSpace: SafeArea(
@@ -95,8 +96,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () async =>
-                      await navigateWithoutAnimation(context, FrontyPage()),
+                  onPressed: () async => await navigateWithoutAnimation(
+                      context, FrontPatternPage()),
                   child: Text('Fronty',
                       style: TextStyle(
                           color: Colors.white,

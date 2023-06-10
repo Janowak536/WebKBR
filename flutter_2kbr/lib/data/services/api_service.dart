@@ -2,36 +2,10 @@ import 'dart:convert';
 import 'package:flutter_2kbr/data/models/dtos/user_register_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_2kbr/data/models/weather_forecast.dart';
 import 'package:flutter/material.dart';
 
 class ApiService {
   final String baseUrl = 'https://localhost:7027';
-  Future<List<WeatherForecast>> getWeatherForecast() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? jwt = prefs.getString('jwt');
-
-    if (jwt == null) {
-      throw Exception('JWT token not found');
-    }
-
-    final response = await http.get(
-      Uri.parse('$baseUrl/WeatherForecast'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $jwt',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      List<dynamic> data = jsonDecode(response.body);
-      List<WeatherForecast> weatherForecasts =
-          data.map((json) => WeatherForecast.fromJson(json)).toList();
-      return weatherForecasts;
-    } else {
-      throw Exception('Failed to fetch weather forecast');
-    }
-  }
 
   Future<bool> isAdmin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
