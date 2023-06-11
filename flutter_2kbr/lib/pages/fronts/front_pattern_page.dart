@@ -146,12 +146,12 @@ class _FrontPatternPageState extends State<FrontPatternPage> {
                     child: GestureDetector(
                       onTap: () {
                         Order order = Order(
-                          pattern: patterns[index].name,
-                          color: '',
-                          thickness: 2, // setting a valid initial thickness
-                          height: 0,
-                          width: 0,
-                        );
+                            pattern: patterns[index].name,
+                            color: '',
+                            thickness: 2, // setting a valid initial thickness
+                            height: 0,
+                            width: 0,
+                            type: "front");
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
