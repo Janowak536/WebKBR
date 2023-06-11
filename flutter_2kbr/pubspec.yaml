@@ -66,11 +66,15 @@ flutter:
    - assets/images/parapety_header.jpg
    - assets/images/stolarz.jpg
    - assets/images/parapet_offer.jpeg
+   # assets for sills
+   - assets/parapety/
    - assets/parapety/parapet_b.jpg
    - assets/parapety/parapet_c.jpg
    - assets/parapety/parapet_e.jpg
    - assets/parapety/parapet_g.jpg
    - assets/parapety/parapet_i.jpg
+   # assets for fronts
+   - assets/fronty/
    - assets/fronty/3D_Lakier.jpg
    - assets/fronty/ABO_04.jpg
    - assets/fronty/ANDROS_035.jpg
@@ -163,6 +167,75 @@ flutter:
    - assets/fronty/YDO_250.jpg
    - assets/fronty/ZGO_46.jpg
    - assets/fronty/ZOBA_04_238.jpg
+  # assets for colors
+   - assets/kolory/
+   - assets/kolory/02.jpg
+   - assets/kolory/05.jpg
+   - assets/kolory/10.jpg
+   - assets/kolory/33.jpg
+   - assets/kolory/46.jpg
+   - assets/kolory/50.jpg
+   - assets/kolory/51.jpg
+   - assets/kolory/74.jpg
+   - assets/kolory/76.jpg
+   - assets/kolory/77.jpg
+   - assets/kolory/90.jpg
+   - assets/kolory/101.jpg
+   - assets/kolory/117.jpg
+   - assets/kolory/193.jpg
+   - assets/kolory/208.jpg
+   - assets/kolory/209.jpg
+   - assets/kolory/210.jpg
+   - assets/kolory/214.jpg
+   - assets/kolory/215.jpg
+   - assets/kolory/218.jpg
+   - assets/kolory/219.jpg
+   - assets/kolory/221.jpg
+   - assets/kolory/222.jpg
+   - assets/kolory/229.jpg
+   - assets/kolory/237.jpg
+   - assets/kolory/243.jpg
+   - assets/kolory/248.jpg
+   - assets/kolory/252.jpg
+   - assets/kolory/253.jpg
+   - assets/kolory/254.jpg
+   - assets/kolory/256.jpg
+   - assets/kolory/258.jpg
+   - assets/kolory/259.jpg
+   - assets/kolory/260.jpg
+   - assets/kolory/261.jpg
+   - assets/kolory/262.jpg
+   - assets/kolory/264.jpg
+   - assets/kolory/265.jpg
+   - assets/kolory/266.jpg
+   - assets/kolory/267.jpg
+   - assets/kolory/268.jpg
+   - assets/kolory/269.jpg
+   - assets/kolory/272.jpg
+   - assets/kolory/275.jpg
+   - assets/kolory/277.jpg
+   - assets/kolory/278.jpg
+   - assets/kolory/282.jpg
+   - assets/kolory/283.jpg
+   - assets/kolory/286.jpg
+   - assets/kolory/290.jpg
+   - assets/kolory/292.jpg
+   - assets/kolory/293.jpg
+   - assets/kolory/294.jpg
+   - assets/kolory/352.jpg
+   - assets/kolory/353.jpg
+   - assets/kolory/354.jpg
+   - assets/kolory/355.jpg
+   - assets/kolory/357.jpg
+   - assets/kolory/359.jpg
+   - assets/kolory/408.jpg
+   - assets/kolory/410.jpg
+   - assets/kolory/426.jpg
+   - assets/kolory/428.jpg
+   - assets/kolory/462.jpg
+   - assets/kolory/464.jpg
+   - assets/kolory/470.jpg
+      
    
   # To add assets to your application, add an assets section, like this:
   # assets:

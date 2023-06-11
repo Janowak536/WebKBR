@@ -38,7 +38,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    'Wybierz grubość frontu meblowego',
+                    'Wybierz grubość frontów meblowych',
                   ),
                   DropdownButton<int>(
                     value: widget.order.thickness,
@@ -51,7 +51,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                     items: <DropdownMenuItem<int>>[
                       DropdownMenuItem<int>(
                         value: 2,
-                        child: Text('2'),
+                        child: Text('18 MDF'),
                       ),
                       DropdownMenuItem<int>(
                         value: 4,
@@ -67,14 +67,14 @@ class _FrontSizePageState extends State<FrontSizePage> {
                     controller: heightController,
                     decoration: InputDecoration(
                       labelText: "Wysokość",
-                      hintText: "Wprowadź wysokość",
+                      hintText: "Wprowadź wysokość w milimetrach",
                     ),
                   ),
                   TextField(
                     controller: widthController,
                     decoration: InputDecoration(
                       labelText: "Szerokość",
-                      hintText: "Wprowadź szerokość",
+                      hintText: "Wprowadź szerokość w milimetrach",
                     ),
                   ),
                   ElevatedButton(

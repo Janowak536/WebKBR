@@ -75,7 +75,7 @@ class _OfferPageState extends State<OfferPage> {
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.orange),
                           ),
-                          child: Text('Kofiguruj'),
+                          child: Text('Konfiguruj'),
                         ),
                       ),
                     ),
@@ -121,7 +121,7 @@ class _OfferPageState extends State<OfferPage> {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.orange),
                         ),
-                        child: Text('Kofiguruj'),
+                        child: Text('Konfiguruj'),
                       ),
                     ),
                   ),

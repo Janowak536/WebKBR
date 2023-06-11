@@ -38,7 +38,7 @@ class _SillSizePageState extends State<SillSizePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    'Wybierz grubość frontu meblowego',
+                    'Wybierz grubość parapetów',
                   ),
                   DropdownButton<int>(
                     value: widget.order.thickness,
@@ -51,15 +51,19 @@ class _SillSizePageState extends State<SillSizePage> {
                     items: <DropdownMenuItem<int>>[
                       DropdownMenuItem<int>(
                         value: 2,
-                        child: Text('2'),
+                        child: Text('19 Finsa Wilgocioodporna'),
                       ),
                       DropdownMenuItem<int>(
                         value: 4,
-                        child: Text('4'),
+                        child: Text('22 Finsa Wilgocioodporna'),
                       ),
                       DropdownMenuItem<int>(
                         value: 6,
-                        child: Text('6'),
+                        child: Text('25 Finsa Wilgocioodporna'),
+                      ),
+                      DropdownMenuItem<int>(
+                        value: 8,
+                        child: Text('30 Finsa Wilgocioodporna'),
                       ),
                     ],
                   ),

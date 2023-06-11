@@ -35,7 +35,7 @@ class _SillPatternPageState extends State<SillPatternPage> {
         ),
         body: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+            crossAxisCount: 2,
           ),
           itemCount: patterns.length,
           itemBuilder: (BuildContext ctx, index) {
