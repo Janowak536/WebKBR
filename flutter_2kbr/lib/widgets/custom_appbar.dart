@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/pages/admin/client_edit_page.dart';
+import 'package:flutter_2kbr/pages/cart_page.dart';
 import 'package:flutter_2kbr/pages/contact_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
@@ -43,6 +44,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         context, ClientEditPage()),
                   ),
                 IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            CartPage(),
+                        transitionDuration: Duration(seconds: 0),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
                   onPressed: () {
                     final authProvider =
                         Provider.of<AuthProvider>(context, listen: false);
@@ -64,7 +79,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.white,
                   iconSize: 35,
                   tooltip: isLoggedIn ? 'Logout' : 'Login',
-                ),
+                )
               ],
             ),
             SizedBox(height: 8),
