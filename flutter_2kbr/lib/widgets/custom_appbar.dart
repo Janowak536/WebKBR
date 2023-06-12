@@ -16,7 +16,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({
     required this.onActionPressed,
   });
-
   @override
   Widget build(BuildContext context) {
     final isLoggedIn = context.watch<AuthProvider>().isLoggedIn;

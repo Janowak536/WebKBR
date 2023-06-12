@@ -31,4 +31,21 @@ class Order {
         width: width ?? this.width,
         type: type ?? this.type);
   }
+
+  Order.fromJson(Map<String, dynamic> json)
+      : pattern = json['pattern'],
+        color = json['color'],
+        thickness = json['thickness'],
+        height = json['height'],
+        width = json['width'],
+        type = json['type'];
+
+  Map<String, dynamic> toJson() => {
+        'pattern': pattern,
+        'color': color,
+        'thickness': thickness,
+        'height': height,
+        'width': width,
+        'type': type,
+      };
 }

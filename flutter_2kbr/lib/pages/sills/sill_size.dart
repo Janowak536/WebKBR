@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
+import 'package:flutter_2kbr/pages/cart_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
@@ -123,10 +126,12 @@ class _SillSizePageState extends State<SillSizePage> {
                                       int.tryParse(heightController.text) ?? 0;
                                   final width =
                                       int.tryParse(widthController.text) ?? 0;
-                                  orders.add(
-                                    widget.order
-                                        .copyWith(height: height, width: width),
-                                  );
+                                  Order newOrder = widget.order.copyWith(
+                                      height: height,
+                                      width: width,
+                                      type: "sill");
+                                  orders.add(newOrder);
+                                  addOrder(newOrder);
                                   heightController.clear();
                                   widthController.clear();
                                 });
@@ -158,6 +163,7 @@ class _SillSizePageState extends State<SillSizePage> {
                       icon: Icon(Icons.delete),
                       onPressed: () {
                         setState(() {
+                          removeOrder(order);
                           orders.removeAt(index);
                         });
                       },
@@ -165,11 +171,51 @@ class _SillSizePageState extends State<SillSizePage> {
                   );
                 },
               ),
-            )
+            ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10.0, right: 20.0),
+                  child: FloatingActionButton(
+                    child: Icon(Icons.navigate_next),
+                    onPressed: () => _navigateToCartPage(),
+                  ),
+                ))
           ],
         ),
       ),
     );
+  }
+
+  void addOrder(Order order) {
+    List<Order> ordersFromStorage = getOrdersFromStorage();
+    ordersFromStorage.add(order);
+    html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
+        .map<Map<String, dynamic>>((order) => order.toJson())
+        .toList());
+  }
+
+  void removeOrder(Order order) {
+    List<Order> ordersFromStorage = getOrdersFromStorage();
+    ordersFromStorage.removeWhere((o) =>
+        o.pattern == order.pattern &&
+        o.color == order.color &&
+        o.thickness == order.thickness &&
+        o.height == order.height &&
+        o.width == order.width &&
+        o.type == order.type);
+    html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
+        .map<Map<String, dynamic>>((order) => order.toJson())
+        .toList());
+  }
+
+  List<Order> getOrdersFromStorage() {
+    String? ordersFromStorage = html.window.localStorage['orders'];
+    if (ordersFromStorage != null) {
+      List<dynamic> decodedData = jsonDecode(ordersFromStorage);
+      return decodedData.map<Order>((item) => Order.fromJson(item)).toList();
+    }
+    return [];
   }
 
   void _navigateToLogin() {
@@ -182,5 +228,15 @@ class _SillSizePageState extends State<SillSizePage> {
     ).then((_) {
       setState(() {});
     });
+  }
+
+  void _navigateToCartPage() {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => CartPage(),
+        transitionDuration: Duration(seconds: 0),
+      ),
+    );
   }
 }
