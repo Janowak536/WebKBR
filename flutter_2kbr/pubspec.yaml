@@ -66,6 +66,15 @@ flutter:
    - assets/images/parapety_header.jpg
    - assets/images/stolarz.jpg
    - assets/images/parapet_offer.jpeg
+   # assets for home screen
+   - assets/images/home1.jpg
+   - assets/images/home2.jpg
+   - assets/images/home3.jpg
+   - assets/images/home4.jpg
+   - assets/images/home5.png
+   - assets/images/home6.png
+   - assets/images/home7.png
+   - assets/images/home8.png
    # assets for sills
    - assets/parapety/
    - assets/parapety/parapet_b.jpg
