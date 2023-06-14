@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                               Colors.red.withOpacity(0)),
                                       onPressed: () {
                                         navigateWithoutAnimation(
-                                            context, SillPatternPage());
+                                            context, SillModelPage());
                                       },
                                       child: Text(
                                         'Parapety',
