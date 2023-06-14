@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
                       ? Icons.event_seat
                       : Icons.border_all),
                   title: Text(
-                    'Wzór: ${order.pattern}, Kolor: ${order.color}, Grubość: ${order.thickness}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                    'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
                   ),
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
@@ -93,12 +93,15 @@ class _CartPageState extends State<CartPage> {
 
   void removeOrder(Order order) {
     orders.removeWhere((o) =>
-        o.pattern == order.pattern &&
+        o.model == order.model &&
         o.color == order.color &&
-        o.thickness == order.thickness &&
+        o.mdf == order.mdf &&
         o.height == order.height &&
         o.width == order.width &&
-        o.type == order.type);
+        o.type == order.type &&
+        o.modelId == order.modelId &&
+        o.colorId == order.colorId &&
+        o.mdfId == order.mdfId);
     html.window.localStorage['orders'] = jsonEncode(
         orders.map<Map<String, dynamic>>((order) => order.toJson()).toList());
   }

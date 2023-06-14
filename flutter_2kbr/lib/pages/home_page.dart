@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
-import 'package:flutter_2kbr/pages/sills/sill_pattern_page.dart';
+import 'package:flutter_2kbr/pages/sills/sill_model_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
 
-import 'fronts/front_pattern_page.dart';
+import 'fronts/front_model_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                     child: ElevatedButton(
                                       onPressed: () {
                                         navigateWithoutAnimation(
-                                            context, FrontPatternPage());
+                                            context, FrontModelPage());
                                       },
                                       child:
                                           const Text('Bogaty katalog frontów'),

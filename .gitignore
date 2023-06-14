@@ -515,3 +515,6 @@ WebKBR.API/bin/Debug/net7.0/WebKBR.API.dll
 /WebKBR.Domain/obj/Debug/net7.0/WebKBR.Domain.pdb
 /WebKBR.API/obj/Debug/net7.0/project.razor.json
 /WebKBR.API/obj/Debug/net7.0/WebKBR.API.csproj.CoreCompileInputs.cache
+/WebKBR.Infrastructure/obj/Debug/net7.0/WebKBR.Infrastructure.assets.cache
+/WebKBR.Infrastructure/obj/Debug/net7.0/refint/WebKBR.Infrastructure.dll
+/WebKBR.Infrastructure/obj/Debug/net7.0/ref/WebKBR.Infrastructure.dll

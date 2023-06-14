@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/data/models/mdf.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
 import 'package:flutter_2kbr/pages/cart_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
@@ -25,6 +26,12 @@ class _SillSizePageState extends State<SillSizePage> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+    List<Mdf> mdfItems = [
+      Mdf(id: 18, name: 'MDF 18'),
+      Mdf(id: 19, name: 'FINSA 19'),
+      Mdf(id: 22, name: 'MDF 22'),
+    ];
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -48,34 +55,25 @@ class _SillSizePageState extends State<SillSizePage> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text('Grubość parapetu'),
-                                DropdownButton<int>(
-                                  value: widget.order.thickness,
-                                  onChanged: (int? newValue) {
+                                Text('Grubość Sill meblowego'),
+                                DropdownButton<Mdf>(
+                                  value: mdfItems.firstWhere(
+                                      (item) => item.id == widget.order.mdfId),
+                                  onChanged: (Mdf? newValue) {
                                     setState(() {
-                                      widget.order = widget.order
-                                          .copyWith(thickness: newValue!);
+                                      widget.order = widget.order.copyWith(
+                                          mdfId: newValue!.id,
+                                          mdf: newValue.name);
                                     });
                                   },
-                                  items: <DropdownMenuItem<int>>[
-                                    DropdownMenuItem<int>(
-                                      value: 2,
-                                      child: Text('19 Finsa Wilgocioodporna'),
-                                    ),
-                                    DropdownMenuItem<int>(
-                                      value: 4,
-                                      child: Text('22 Finsa Wilgocioodporna'),
-                                    ),
-                                    DropdownMenuItem<int>(
-                                      value: 6,
-                                      child: Text('25 Finsa Wilgocioodporna'),
-                                    ),
-                                    DropdownMenuItem<int>(
-                                      value: 8,
-                                      child: Text('30 Finsa Wilgocioodporna'),
-                                    ),
-                                  ],
-                                ),
+                                  items: mdfItems
+                                      .map<DropdownMenuItem<Mdf>>((Mdf item) {
+                                    return DropdownMenuItem<Mdf>(
+                                      value: item,
+                                      child: Text(item.name),
+                                    );
+                                  }).toList(),
+                                )
                               ],
                             ),
                           ),
@@ -157,7 +155,7 @@ class _SillSizePageState extends State<SillSizePage> {
                   final order = orders[index];
                   return ListTile(
                     title: Text(
-                      'Wzór: ${order.pattern}, Kolor: ${order.color}, Grubość: ${order.thickness}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                      'Wzór: ${order.model}, Kolor: ${order.color}, MDF: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
@@ -198,12 +196,15 @@ class _SillSizePageState extends State<SillSizePage> {
   void removeOrder(Order order) {
     List<Order> ordersFromStorage = getOrdersFromStorage();
     ordersFromStorage.removeWhere((o) =>
-        o.pattern == order.pattern &&
+        o.model == order.model &&
         o.color == order.color &&
-        o.thickness == order.thickness &&
+        o.mdf == order.mdf &&
         o.height == order.height &&
         o.width == order.width &&
-        o.type == order.type);
+        o.type == order.type &&
+        o.modelId == order.modelId &&
+        o.colorId == order.colorId &&
+        o.mdfId == order.mdfId);
     html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
         .map<Map<String, dynamic>>((order) => order.toJson())
         .toList());

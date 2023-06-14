@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/data/models/mdf.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
 import 'package:flutter_2kbr/pages/cart_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
@@ -21,7 +22,11 @@ class _FrontSizePageState extends State<FrontSizePage> {
   TextEditingController heightController = TextEditingController();
   TextEditingController widthController = TextEditingController();
   List<Order> orders = [];
-
+  List<Mdf> mdfItems = [
+    Mdf(id: 2, name: '2'),
+    Mdf(id: 4, name: '4'),
+    Mdf(id: 6, name: '6'),
+  ];
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -49,29 +54,27 @@ class _FrontSizePageState extends State<FrontSizePage> {
                             child: Column(
                               children: [
                                 Text('Grubość frontu meblowego'),
-                                DropdownButton<int>(
-                                  value: widget.order.thickness,
-                                  onChanged: (int? newValue) {
+                                DropdownButton<Mdf>(
+                                  value: mdfItems.firstWhere(
+                                    (item) => item.id == widget.order.mdfId,
+                                    orElse: () => mdfItems[
+                                        0], // use the first Mdf object as default
+                                  ),
+                                  onChanged: (Mdf? newValue) {
                                     setState(() {
-                                      widget.order = widget.order
-                                          .copyWith(thickness: newValue!);
+                                      widget.order = widget.order.copyWith(
+                                          mdfId: newValue!.id,
+                                          mdf: newValue.name);
                                     });
                                   },
-                                  items: <DropdownMenuItem<int>>[
-                                    DropdownMenuItem<int>(
-                                      value: 2,
-                                      child: Text('2'),
-                                    ),
-                                    DropdownMenuItem<int>(
-                                      value: 4,
-                                      child: Text('4'),
-                                    ),
-                                    DropdownMenuItem<int>(
-                                      value: 6,
-                                      child: Text('6'),
-                                    ),
-                                  ],
-                                ),
+                                  items: mdfItems
+                                      .map<DropdownMenuItem<Mdf>>((Mdf item) {
+                                    return DropdownMenuItem<Mdf>(
+                                      value: item,
+                                      child: Text(item.name),
+                                    );
+                                  }).toList(),
+                                )
                               ],
                             ),
                           ),
@@ -130,6 +133,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                                   addOrder(newOrder);
                                   heightController.clear();
                                   widthController.clear();
+                                  print(jsonEncode(newOrder.toJson()));
                                 });
                               },
                               child: Text('Dodaj do listy'),
@@ -153,7 +157,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                   final order = orders[index];
                   return ListTile(
                     title: Text(
-                      'Wzór: ${order.pattern}, Kolor: ${order.color}, Grubość: ${order.thickness}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                      'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
@@ -194,12 +198,15 @@ class _FrontSizePageState extends State<FrontSizePage> {
   void removeOrder(Order order) {
     List<Order> ordersFromStorage = getOrdersFromStorage();
     ordersFromStorage.removeWhere((o) =>
-        o.pattern == order.pattern &&
+        o.model == order.model &&
         o.color == order.color &&
-        o.thickness == order.thickness &&
+        o.mdf == order.mdf &&
         o.height == order.height &&
         o.width == order.width &&
-        o.type == order.type);
+        o.type == order.type &&
+        o.modelId == order.modelId &&
+        o.colorId == order.colorId &&
+        o.mdfId == order.mdfId);
     html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
         .map<Map<String, dynamic>>((order) => order.toJson())
         .toList());
