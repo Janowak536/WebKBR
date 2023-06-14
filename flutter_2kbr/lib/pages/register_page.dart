@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/dtos/user_register_dto.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
@@ -123,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             EdgeInsets.symmetric(horizontal: 20, vertical: 15)),
                       ),
                       child: Text(
-                        'Zaloguj',
+                        'Zarejestruj',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -179,7 +181,6 @@ class _RegisterPageState extends State<RegisterPage> {
       UserRegisterDto newUser = UserRegisterDto(
         username: _usernameController.text,
         password: _passwordController.text,
-        confirmPassword: _confirmPasswordController.text,
         name: _nameController.text,
         nip: _nipController.text,
         email: _emailController.text,
@@ -188,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
         city: _cityController.text,
         postalCode: _postalCodeController.text,
       );
-
+      print(jsonEncode(newUser.toJson()));
       await ApiService().register(newUser);
 
       String jwt = await ApiService().login(

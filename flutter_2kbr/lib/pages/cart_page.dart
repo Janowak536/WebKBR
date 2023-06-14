@@ -64,10 +64,7 @@ class _CartPageState extends State<CartPage> {
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      setState(() {
-                        removeOrder(order);
-                        orders.removeAt(index);
-                      });
+                      removeOrder(order);
                     },
                   ),
                 ),
@@ -92,17 +89,30 @@ class _CartPageState extends State<CartPage> {
   }
 
   void removeOrder(Order order) {
-    orders.removeWhere((o) =>
-        o.model == order.model &&
-        o.color == order.color &&
-        o.mdf == order.mdf &&
-        o.height == order.height &&
-        o.width == order.width &&
-        o.type == order.type &&
-        o.modelId == order.modelId &&
-        o.colorId == order.colorId &&
-        o.mdfId == order.mdfId);
-    html.window.localStorage['orders'] = jsonEncode(
-        orders.map<Map<String, dynamic>>((order) => order.toJson()).toList());
+    bool removed = false;
+    setState(() {
+      orders.removeWhere((o) {
+        if (!removed &&
+            o.model == order.model &&
+            o.color == order.color &&
+            o.mdf == order.mdf &&
+            o.height == order.height &&
+            o.width == order.width &&
+            o.type == order.type &&
+            o.modelId == order.modelId &&
+            o.colorId == order.colorId &&
+            o.mdfId == order.mdfId) {
+          removed = true;
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (removed) {
+        html.window.localStorage['orders'] = jsonEncode(orders
+            .map<Map<String, dynamic>>((order) => order.toJson())
+            .toList());
+      }
+    });
   }
 }

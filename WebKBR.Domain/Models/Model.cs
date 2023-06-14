@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+namespace WebKBR.Domain.Models;
 
 public partial class Model
 {
@@ -10,7 +11,7 @@ public partial class Model
 
     public string? Type { get; set; }
 
-    public decimal? WorthValue { get; set; }
+    public decimal? Value { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

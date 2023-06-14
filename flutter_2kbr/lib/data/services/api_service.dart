@@ -37,6 +37,25 @@ class ApiService {
     }
   }
 
+  Future<void> changePassword(
+      String username, String oldPassword, String newPassword) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/User/ChangePassword'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'Username': username,
+        'OldPassword': oldPassword,
+        'NewPassword': newPassword,
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to change password');
+    }
+  }
+
   Future<String> login(String username, String password) async {
     try {
       final response = await http.post(
@@ -104,35 +123,6 @@ class ApiService {
 
     if (response.statusCode != 204) {
       throw Exception('Failed to edit client details');
-    }
-  }
-
-  Future<String> changePassword(
-      String username, String oldPassword, String newPassword) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? jwt = prefs.getString('jwt');
-
-    if (jwt == null) {
-      throw Exception('JWT token not found');
-    }
-
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/User/ChangePassword'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $jwt',
-      },
-      body: jsonEncode({
-        'Username': username,
-        'OldPassword': oldPassword,
-        'NewPassword': newPassword
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      return 'Password changed successfully';
-    } else {
-      throw Exception('Failed to change password');
     }
   }
 }

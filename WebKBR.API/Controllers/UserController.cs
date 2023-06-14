@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using WebKBR.Domain.Models;
+using WebKBR.Infrastructure;
 
 namespace WebKBR.API.Controllers
 {
@@ -17,9 +19,9 @@ namespace WebKBR.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly Db2KbrContext _context;
+        private readonly Db2kbrContext _context;
         private readonly IConfiguration _configuration;
-        public UserController(Db2KbrContext context, IConfiguration configuration)
+        public UserController(Db2kbrContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -30,7 +32,7 @@ namespace WebKBR.API.Controllers
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
             // Check if the email already exists
-            if (_context.Users.Any(user => user.Username == userRegisterDto.Username))
+            if (_context.Clients.Any(user => user.Username == userRegisterDto.Username))
             {
                 return BadRequest("Email already exists");
             }
@@ -40,28 +42,21 @@ namespace WebKBR.API.Controllers
 
             var client = new Client
             {
+                Username = userRegisterDto.Username,
+                PasswordHash = hashedPassword,
                 Name = userRegisterDto.Name,
-                NIP = userRegisterDto.NIP,
+                Nip = userRegisterDto.NIP,
                 Phone = userRegisterDto.Phone,
                 Email = userRegisterDto.Email,
                 Address = userRegisterDto.Address,
                 City = userRegisterDto.City,
                 PostalCode = userRegisterDto.PostalCode,
                 ClientType = userRegisterDto.ClientType,
-                DiscountCode = userRegisterDto.DiscountCode
+                DiscountCode = "nic",
+                UserRole = "User",
             };
 
             _context.Clients.Add(client);
-            await _context.SaveChangesAsync();
-
-            var user = new User
-            {
-                Username = userRegisterDto.Username,
-                PasswordHash = hashedPassword,
-                ClientId = client.ClientId  // assuming ClientId is the generated id of the client
-            };
-
-            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return StatusCode(201);
@@ -72,7 +67,7 @@ namespace WebKBR.API.Controllers
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
             // Find the user by email
-            var user = _context.Users.SingleOrDefault(user => user.Username == userLoginDto.Username);
+            var user = _context.Clients.SingleOrDefault(user => user.Username == userLoginDto.Username);
 
             if (user == null)
             {
@@ -95,7 +90,7 @@ namespace WebKBR.API.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)  // Add this line
+            new Claim(ClaimTypes.Role, user.UserRole)  // Add this line
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -112,7 +107,7 @@ namespace WebKBR.API.Controllers
         public async Task<IActionResult> ChangePassword(UserChangePasswordDto userChangePasswordDto)
         {
             // Find the user by email
-            var user = _context.Users.SingleOrDefault(user => user.Username == userChangePasswordDto.Username);
+            var user = _context.Clients.SingleOrDefault(user => user.Username == userChangePasswordDto.Username);
 
             if (user == null)
             {
@@ -129,7 +124,7 @@ namespace WebKBR.API.Controllers
 
             // Hash the new password and store it
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(userChangePasswordDto.NewPassword);
-            _context.Users.Update(user);
+            _context.Clients.Update(user);
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -145,21 +140,21 @@ namespace WebKBR.API.Controllers
                 return Unauthorized();
             }
 
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Clients.SingleOrDefaultAsync(u => u.Username == username);
 
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            var isAdmin = user.Role == "admin";
+            var isAdmin = user.UserRole == "Admin";
 
             return Ok(new { IsAdmin = isAdmin });
         }
         [HttpPut("EditClientDetails")]
         public async Task<IActionResult> EditClientDetails(ClientEditDto clientEditDto)
         {
-            var client = await _context.Clients.Where(c => c.NIP == clientEditDto.NIP.ToString()).FirstOrDefaultAsync();
+            var client = await _context.Clients.Where(c => c.Nip == clientEditDto.NIP.ToString()).FirstOrDefaultAsync();
 
             if (client == null)
             {

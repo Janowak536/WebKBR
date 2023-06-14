@@ -1,7 +1,6 @@
 class UserRegisterDto {
   String username;
   String password;
-  String confirmPassword;
   String name;
   String nip;
   String phone;
@@ -13,7 +12,6 @@ class UserRegisterDto {
   UserRegisterDto({
     required this.username,
     required this.password,
-    required this.confirmPassword,
     required this.name,
     required this.nip,
     required this.phone,
@@ -26,7 +24,6 @@ class UserRegisterDto {
   Map<String, dynamic> toJson() => {
         'Username': username,
         'Password': password,
-        'ConfirmPassword': confirmPassword,
         'Name': name,
         'NIP': nip,
         'Phone': phone,

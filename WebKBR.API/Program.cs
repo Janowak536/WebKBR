@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using Microsoft.Extensions.Options;
+using WebKBR.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -45,7 +46,7 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
-builder.Services.AddDbContext<Db2KbrContext>(options =>
+builder.Services.AddDbContext<Db2kbrContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDb")));
 
 var app = builder.Build();

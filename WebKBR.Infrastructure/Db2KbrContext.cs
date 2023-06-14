@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using WebKBR.Domain.Models;
 
-public partial class Db2KbrContext : DbContext
+namespace WebKBR.Infrastructure;
+
+public partial class Db2kbrContext : DbContext
 {
-    public Db2KbrContext()
+    public Db2kbrContext()
     {
     }
 
-    public Db2KbrContext(DbContextOptions<Db2KbrContext> options)
+    public Db2kbrContext(DbContextOptions<Db2kbrContext> options)
         : base(options)
     {
     }
 
     public virtual DbSet<Client> Clients { get; set; }
-
-    public virtual DbSet<ClientsOrder> ClientsOrders { get; set; }
 
     public virtual DbSet<Color> Colors { get; set; }
 
@@ -25,8 +26,6 @@ public partial class Db2KbrContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-0URS1MD;Database=db_2kbr;Trusted_Connection=True;TrustServerCertificate=True");
@@ -35,17 +34,11 @@ public partial class Db2KbrContext : DbContext
     {
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.ClientId).HasName("PK__Clients__81A2CB818E546450");
+            entity.HasKey(e => e.ClientId).HasName("PK__Clients__E67E1A0450B329C4");
 
-            entity.HasIndex(e => e.DiscountCode, "UQ__Clients__3D87979AF178DF29").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Clients__536C85E44EDB3DC9").IsUnique();
 
-            entity.HasIndex(e => e.Phone, "UQ__Clients__5C7E359E627C7ECE").IsUnique();
-
-            entity.HasIndex(e => e.Email, "UQ__Clients__A9D1053475D1B40B").IsUnique();
-
-            entity.HasIndex(e => e.NIP, "UQ__Clients__C7DEC3C6E1EC6C28").IsUnique();
-
-            entity.Property(e => e.ClientId).HasColumnName("clientID");
+            entity.Property(e => e.ClientId).HasColumnName("ClientID");
             entity.Property(e => e.Address)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -54,19 +47,17 @@ public partial class Db2KbrContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.ClientType)
                 .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("clientType");
+                .IsUnicode(false);
             entity.Property(e => e.DiscountCode)
                 .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("discountCode");
+                .IsUnicode(false);
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.NIP)
+            entity.Property(e => e.Nip)
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsFixedLength()
@@ -78,140 +69,96 @@ public partial class Db2KbrContext : DbContext
             entity.Property(e => e.PostalCode)
                 .HasMaxLength(6)
                 .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("postalCode");
-        });
-
-        modelBuilder.Entity<ClientsOrder>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("clientsOrders");
-
-            entity.HasIndex(e => e.OrderId, "UQ__clientsO__0809337C8271E302").IsUnique();
-
-            entity.Property(e => e.ClientId).HasColumnName("clientID");
-            entity.Property(e => e.OrderDate)
-                .HasColumnType("date")
-                .HasColumnName("orderDate");
-            entity.Property(e => e.OrderId).HasColumnName("orderID");
-            entity.Property(e => e.OrderValue)
-                .HasColumnType("decimal(15, 2)")
-                .HasColumnName("orderValue");
-
-            entity.HasOne(d => d.Client).WithMany()
-                .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__clientsOr__clien__3A81B327");
-
-            entity.HasOne(d => d.Order).WithOne()
-                .HasForeignKey<ClientsOrder>(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__clientsOr__order__3B75D760");
+                .IsFixedLength();
+            entity.Property(e => e.UserRole).HasMaxLength(20);
+            entity.Property(e => e.Username).HasMaxLength(256);
         });
 
         modelBuilder.Entity<Color>(entity =>
         {
-            entity.HasKey(e => e.ColorId).HasName("PK__Colors__70A64C3D147A70FB");
+            entity.HasKey(e => e.ColorId).HasName("PK__Colors__8DA7676DB6F2CD24");
 
             entity.Property(e => e.ColorId)
                 .ValueGeneratedNever()
-                .HasColumnName("colorID");
+                .HasColumnName("ColorID");
             entity.Property(e => e.ColorName)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("colorName");
+                .IsFixedLength();
             entity.Property(e => e.Type)
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.WorthValue)
-                .HasColumnType("decimal(15, 2)")
-                .HasColumnName("worthValue");
+            entity.Property(e => e.Value).HasColumnType("decimal(15, 2)");
         });
 
         modelBuilder.Entity<Mdf>(entity =>
         {
-            entity.HasKey(e => e.MdfId).HasName("PK__MDF__35C49AC2EE4C1934");
+            entity.HasKey(e => e.MdfId).HasName("PK__MDF__1D29DD2BA8D2C6BD");
 
             entity.ToTable("MDF");
 
             entity.Property(e => e.MdfId)
                 .ValueGeneratedNever()
-                .HasColumnName("mdfID");
+                .HasColumnName("MdfID");
             entity.Property(e => e.MdfName)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("mdfName");
+                .IsFixedLength();
             entity.Property(e => e.Type)
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.WorthValue)
-                .HasColumnType("decimal(15, 2)")
-                .HasColumnName("worthValue");
+            entity.Property(e => e.Value).HasColumnType("decimal(15, 2)");
         });
 
         modelBuilder.Entity<Model>(entity =>
         {
-            entity.HasKey(e => e.ModelId).HasName("PK__Models__0215CDB9E41C0F0B");
+            entity.HasKey(e => e.ModelId).HasName("PK__Models__E8D7A1CCE3D855E3");
 
-            entity.Property(e => e.ModelId).HasColumnName("modelID");
+            entity.Property(e => e.ModelId).HasColumnName("ModelID");
             entity.Property(e => e.ModelName)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("modelName");
+                .IsFixedLength();
             entity.Property(e => e.Type)
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.WorthValue)
-                .HasColumnType("decimal(15, 2)")
-                .HasColumnName("worthValue");
+            entity.Property(e => e.Value).HasColumnType("decimal(15, 2)");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D83F2914D");
+            entity.HasKey(e => e.ProductId).HasName("PK__Orders__B40CC6ED476D7E2C");
 
-            entity.Property(e => e.OrderId).HasColumnName("orderID");
-            entity.Property(e => e.ColorId).HasColumnName("colorID");
-            entity.Property(e => e.MdfId).HasColumnName("mdfID");
-            entity.Property(e => e.ModelId).HasColumnName("modelID");
-            entity.Property(e => e.TotalValue)
-                .HasColumnType("decimal(20, 2)")
-                .HasColumnName("totalValue");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.ColorId).HasColumnName("ColorID");
+            entity.Property(e => e.MdfId).HasColumnName("MdfID");
+            entity.Property(e => e.ModelId).HasColumnName("ModelID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.OrderValue).HasColumnType("decimal(20, 2)");
+
+            entity.HasOne(d => d.Client).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.ClientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Orders__ClientID__2D27B809");
 
             entity.HasOne(d => d.Color).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ColorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__colorID__36B12243");
+                .HasConstraintName("FK__Orders__ColorID__2F10007B");
 
             entity.HasOne(d => d.Mdf).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.MdfId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__mdfID__37A5467C");
+                .HasConstraintName("FK__Orders__MdfID__300424B4");
 
             entity.HasOne(d => d.Model).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ModelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__modelID__35BCFE0A");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACD239DF25");
-
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.ClientId).HasColumnName("ClientID");
-            entity.Property(e => e.Username).HasMaxLength(256);
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Users)
-                .HasForeignKey(d => d.ClientId)
-                .HasConstraintName("FK__Users__ClientID__32E0915F");
+                .HasConstraintName("FK__Orders__ModelID__2E1BDC42");
         });
 
         OnModelCreatingPartial(modelBuilder);

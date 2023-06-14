@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+namespace WebKBR.Domain.Models;
 
 public partial class Client
 {
@@ -8,7 +9,7 @@ public partial class Client
 
     public string? Name { get; set; }
 
-    public string? NIP { get; set; }
+    public string? Nip { get; set; }
 
     public string? Phone { get; set; }
 
@@ -24,5 +25,11 @@ public partial class Client
 
     public string? DiscountCode { get; set; }
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public string Username { get; set; } = null!;
+
+    public string PasswordHash { get; set; } = null!;
+
+    public string? UserRole { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }
