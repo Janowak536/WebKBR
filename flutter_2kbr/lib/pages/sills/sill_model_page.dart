@@ -20,7 +20,31 @@ class _SillModelPageState extends State<SillModelPage> {
     final authProvider = Provider.of<AuthProvider>(context);
 
     final List<Model> models = [
-      Model(name: "Ramiak", image: 'assets/fronty/ZOBA_04_238.jpg', modelId: 1),
+      Model(
+        name: "Wykończenie B",
+        image: 'assets/parapety/parapet_b.jpg',
+        modelId: 1,
+      ),
+      Model(
+        name: "Wykończenie C",
+        image: 'assets/parapety/parapet_c.jpg',
+        modelId: 2,
+      ),
+      Model(
+        name: "Wykończenie E",
+        image: 'assets/parapety/parapet_e.jpg',
+        modelId: 3,
+      ),
+      Model(
+        name: "Wykończenie G",
+        image: 'assets/parapety/parapet_g.jpg',
+        modelId: 4,
+      ),
+      Model(
+        name: "Wykończenie I",
+        image: 'assets/parapety/parapet_i.jpg',
+        modelId: 5,
+      ),
     ];
 
     return WillPopScope(

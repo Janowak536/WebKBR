@@ -24,9 +24,10 @@ class _FrontSizePageState extends State<FrontSizePage> {
   List<Order> orders = [];
   List<Mdf> mdfItems = [
     Mdf(id: 0, name: ''),
-    Mdf(id: 1, name: '2'),
-    Mdf(id: 4, name: '4'),
-    Mdf(id: 6, name: '6'),
+    Mdf(id: 1, name: '19 Finsa Wilgocioodporna'),
+    Mdf(id: 2, name: '22 Finsa Wilgocioodporna'),
+    Mdf(id: 3, name: '25 Finsa Wilgocioodporna'),
+    Mdf(id: 4, name: '30 Finsa Wilgocioodporna'),
   ];
   @override
   Widget build(BuildContext context) {
