@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using WebKBR.Domain.Dto;
 using WebKBR.Domain.Models;
 using WebKBR.Infrastructure;
+
 
 namespace WebKBR.API.Controllers
 {
@@ -17,29 +21,39 @@ namespace WebKBR.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder(OrderDto orderDto)
+        public IActionResult CreateOrders([FromBody] List<OrderDto> orderDtos)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var order = new Order
+            // Generowanie jednego losowego OrderId dla całej listy zamówień
+            var orderId = GenerateOrderId();
+
+            var orders = orderDtos.Select(orderDto => new Order
             {
                 ClientId = orderDto.ClientID,
-                OrderId = orderDto.OrderID,
+                OrderId = orderId,
                 ModelId = orderDto.ModelID,
                 ColorId = orderDto.ColorID,
                 MdfId = orderDto.MdfID,
                 Width = orderDto.Width,
                 Height = orderDto.Height,
                 OrderValue = orderDto.OrderValue
-            };
+            }).ToList();
 
-            _context.Orders.Add(order);
+            _context.Orders.AddRange(orders);
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        private int GenerateOrderId()
+        {
+            // Generowanie losowego OrderId
+            Random random = new Random();
+            return random.Next(1000, 9999);
         }
     }
 }

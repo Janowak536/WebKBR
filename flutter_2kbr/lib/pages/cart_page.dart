@@ -129,8 +129,23 @@ class _CartPageState extends State<CartPage> {
   }
 
   void sendJsonData() {
-    final jsonData = jsonEncode(
-        orders.map<Map<String, dynamic>>((order) => order.toJson()).toList());
+    final List<Map<String, dynamic>> transformedData = orders.map((order) {
+      return {
+        'clientID': 0,
+        'orderID': 0,
+        'modelID': order.modelId,
+        'colorID': order.colorId,
+        'mdfID': order.mdfId,
+        'width': order.width,
+        'height': order.height,
+        'orderValue': 0,
+      };
+    }).toList();
+
+    final jsonData = jsonEncode(transformedData);
     print(jsonData);
+
+    // Wysyłanie danych JSON do API
+    // Tutaj umieść kod obsługujący żądanie POST z wykorzystaniem jsonData
   }
 }
