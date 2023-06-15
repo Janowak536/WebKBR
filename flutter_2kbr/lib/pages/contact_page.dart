@@ -39,7 +39,7 @@ class _ContactPageState extends State<ContactPage> {
                       height: MediaQuery.of(context).size.height / 6,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/klasyczna.jpg'),
+                          image: AssetImage('assets/images/contact.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
