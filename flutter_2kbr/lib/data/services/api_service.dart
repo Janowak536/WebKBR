@@ -72,6 +72,13 @@ class ApiService {
       if (response.statusCode == 200) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('jwt', jsonDecode(response.body)['token']);
+
+        // Pobranie clientId i zapisanie go w SharedPreferences
+        final clientId = jsonDecode(response.body)['clientId'];
+        if (clientId != null) {
+          await prefs.setInt('clientId', clientId);
+        }
+
         Map<String, dynamic> json = jsonDecode(response.body);
         return json['token'];
       } else {

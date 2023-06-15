@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html' as html;
+import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
@@ -18,7 +18,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    String? ordersFromStorage = html.window.localStorage['orders'];
+    String? ordersFromStorage = window.localStorage['orders'];
     if (ordersFromStorage != null) {
       List<dynamic> decodedData = jsonDecode(ordersFromStorage);
       orders = decodedData.map<Order>((item) => Order.fromJson(item)).toList();
@@ -43,33 +43,45 @@ class _CartPageState extends State<CartPage> {
             color: Colors.grey,
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
-          child: ListView.builder(
-            itemCount: orders.length,
-            itemBuilder: (context, index) {
-              final order = orders[index];
-              return Container(
-                margin: EdgeInsets.all(8.0),
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    final order = orders[index];
+                    return Container(
+                      margin: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(order.type == 'front'
+                            ? Icons.event_seat
+                            : Icons.border_all),
+                        title: Text(
+                          'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            removeOrder(order);
+                          },
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                child: ListTile(
-                  leading: Icon(order.type == 'front'
-                      ? Icons.event_seat
-                      : Icons.border_all),
-                  title: Text(
-                    'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      removeOrder(order);
-                    },
-                  ),
-                ),
-              );
-            },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  sendJsonData();
+                },
+                child: Text('Wyślij JSON'),
+              ),
+            ],
           ),
         ),
       ),
@@ -109,10 +121,16 @@ class _CartPageState extends State<CartPage> {
         }
       });
       if (removed) {
-        html.window.localStorage['orders'] = jsonEncode(orders
+        window.localStorage['orders'] = jsonEncode(orders
             .map<Map<String, dynamic>>((order) => order.toJson())
             .toList());
       }
     });
+  }
+
+  void sendJsonData() {
+    final jsonData = jsonEncode(
+        orders.map<Map<String, dynamic>>((order) => order.toJson()).toList());
+    print(jsonData);
   }
 }
