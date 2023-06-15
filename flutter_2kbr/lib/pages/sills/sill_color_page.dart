@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
 import 'package:flutter_2kbr/data/models/color.dart';
-import 'package:flutter_2kbr/pages/fronts/front_size.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/sills/sill_size.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
@@ -67,6 +68,7 @@ class _SillColorPageState extends State<SillColorPage> {
                         final updatedOrder = widget.order.copyWith(
                             color: colors[index].name,
                             colorId: colors[index].colorId);
+                        print(jsonEncode(updatedOrder.toJson()));
                         Navigator.of(context).pushReplacement(
                           PageRouteBuilder(
                             pageBuilder:

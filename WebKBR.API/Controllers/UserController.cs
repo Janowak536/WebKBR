@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using WebKBR.Domain.Models;
 using WebKBR.Infrastructure;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
 
 namespace WebKBR.API.Controllers
 {
@@ -59,7 +61,9 @@ namespace WebKBR.API.Controllers
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return StatusCode(201);
+            var token = GenerateJwtToken(client.Username, client.UserRole, client.ClientId.ToString());
+
+            return StatusCode(201, new { Token = token });
         }
 
 
@@ -82,15 +86,24 @@ namespace WebKBR.API.Controllers
                 return Unauthorized("Invalid password");
             }
 
-            // User is authenticated, generate a JWT
+            // Generate JWT token
+            var token = GenerateJwtToken(user.Username, user.UserRole, user.ClientId.ToString());
+
+            // Return the token to the client
+            return Ok(new { Token = token });
+        }
+
+        private string GenerateJwtToken(string username, string role, string userId)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.UserRole)  // Add this line
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.Role, role),
+            new Claim(ClaimTypes.NameIdentifier, userId) // Add this line
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -98,10 +111,8 @@ namespace WebKBR.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            // Return the token to the client
-            return Ok(new { Token = tokenString });
+            return tokenString;
         }
-
         // Change password endpoint
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(UserChangePasswordDto userChangePasswordDto)
@@ -129,28 +140,7 @@ namespace WebKBR.API.Controllers
 
             return Ok();
         }
-        [HttpGet("IsAdmin")]
-        [Authorize]
-        public async Task<IActionResult> IsAdmin()
-        {
-            var username = User.Identity?.Name;
-
-            if (string.IsNullOrEmpty(username))
-            {
-                return Unauthorized();
-            }
-
-            var user = await _context.Clients.SingleOrDefaultAsync(u => u.Username == username);
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            var isAdmin = user.UserRole == "Admin";
-
-            return Ok(new { IsAdmin = isAdmin });
-        }
+       
         [HttpPut("EditClientDetails")]
         public async Task<IActionResult> EditClientDetails(ClientEditDto clientEditDto)
         {
@@ -174,10 +164,54 @@ namespace WebKBR.API.Controllers
             {
                 throw;
             }
-
             return NoContent();
         }
 
+        [HttpGet("IsAdmin")]
+        [Authorize]
+        public async Task<IActionResult> IsAdmin()
+        {
+            var username = User.Identity?.Name;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _context.Clients.SingleOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var isAdmin = user.UserRole == "Admin";
+
+            return Ok(new { IsAdmin = isAdmin });
+        }
+
+        [HttpGet("GetCurrentUser")]
+        [Authorize]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var username = User.Identity?.Name;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _context.Clients.SingleOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var userId = user.ClientId;
+
+            return Ok(new { userId = userId });
+        }
 
     }
 }

@@ -23,7 +23,8 @@ class _FrontSizePageState extends State<FrontSizePage> {
   TextEditingController widthController = TextEditingController();
   List<Order> orders = [];
   List<Mdf> mdfItems = [
-    Mdf(id: 2, name: '2'),
+    Mdf(id: 0, name: ''),
+    Mdf(id: 1, name: '2'),
     Mdf(id: 4, name: '4'),
     Mdf(id: 6, name: '6'),
   ];
@@ -57,15 +58,18 @@ class _FrontSizePageState extends State<FrontSizePage> {
                                 DropdownButton<Mdf>(
                                   value: mdfItems.firstWhere(
                                     (item) => item.id == widget.order.mdfId,
-                                    orElse: () => mdfItems[
-                                        0], // use the first Mdf object as default
+                                    orElse: () => mdfItems[0],
                                   ),
                                   onChanged: (Mdf? newValue) {
-                                    setState(() {
-                                      widget.order = widget.order.copyWith(
-                                          mdfId: newValue!.id,
-                                          mdf: newValue.name);
-                                    });
+                                    if (newValue != null) {
+                                      setState(() {
+                                        widget.order.mdfId = newValue.id;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        widget.order.mdfId = 1;
+                                      });
+                                    }
                                   },
                                   items: mdfItems
                                       .map<DropdownMenuItem<Mdf>>((Mdf item) {
@@ -157,7 +161,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                   final order = orders[index];
                   return ListTile(
                     title: Text(
-                      'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                      'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),

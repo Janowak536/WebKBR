@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
+import 'package:flutter_2kbr/data/services/api_service.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
@@ -62,7 +63,7 @@ class _CartPageState extends State<CartPage> {
                             ? Icons.event_seat
                             : Icons.border_all),
                         title: Text(
-                          'Wzór: ${order.model}, Kolor: ${order.color}, Grubość: ${order.mdf}, Wysokość: ${order.height}, Szerokość: ${order.width}, Typ: ${order.type}',
+                          'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
                         ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
@@ -128,24 +129,8 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  void sendJsonData() {
-    final List<Map<String, dynamic>> transformedData = orders.map((order) {
-      return {
-        'clientID': 0,
-        'orderID': 0,
-        'modelID': order.modelId,
-        'colorID': order.colorId,
-        'mdfID': order.mdfId,
-        'width': order.width,
-        'height': order.height,
-        'orderValue': 0,
-      };
-    }).toList();
-
-    final jsonData = jsonEncode(transformedData);
-    print(jsonData);
-
-    // Wysyłanie danych JSON do API
-    // Tutaj umieść kod obsługujący żądanie POST z wykorzystaniem jsonData
+  void sendJsonData() async {
+    final apiService = ApiService();
+    await apiService.sendJsonData(orders);
   }
 }

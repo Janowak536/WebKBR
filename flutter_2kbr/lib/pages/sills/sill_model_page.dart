@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/order.dart';
 import 'package:flutter_2kbr/data/models/model.dart';
-import 'package:flutter_2kbr/pages/fronts/front_color_page.dart';
 import 'package:flutter_2kbr/pages/login_page.dart';
 import 'package:flutter_2kbr/pages/sills/sill_color_page.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
@@ -36,7 +37,7 @@ class _SillModelPageState extends State<SillModelPage> {
               alignment: Alignment.topCenter,
               padding: EdgeInsets.all(10),
               child: Text(
-                'Poniższe Sill meblowe są dostępne w różnorodnej kolorystyce',
+                'Poniższe parapety są dostępne w różnorodnej kolorystyce',
                 style: TextStyle(
                   color: Color.fromARGB(164, 164, 164, 164),
                   fontSize: 20,
@@ -57,15 +58,17 @@ class _SillModelPageState extends State<SillModelPage> {
                     child: GestureDetector(
                       onTap: () {
                         Order order = Order(
-                            model: models[index].name,
-                            modelId: models[index].modelId,
-                            colorId: 0,
-                            mdfId: 0,
-                            color: '',
-                            mdf: '',
-                            height: 0,
-                            width: 0,
-                            type: "sill");
+                          model: models[index].name,
+                          color: '',
+                          mdf: '',
+                          height: 0,
+                          width: 0,
+                          type: "sill",
+                          modelId: models[index].modelId,
+                          colorId: 0,
+                          mdfId: 0,
+                        );
+                        print(jsonEncode(order.toJson()));
                         Navigator.of(context).push(
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
