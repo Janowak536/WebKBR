@@ -15,6 +15,8 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<Order> orders = [];
+  double totalValue = 0;
+  double orderValue = 0;
 
   @override
   void initState() {
@@ -76,11 +78,35 @@ class _CartPageState extends State<CartPage> {
                   },
                 ),
               ),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   sendJsonData();
                 },
                 child: Text('Wyślij JSON'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final apiService = ApiService();
+                  final double calculatedValue =
+                      await apiService.calculateJsonData(orders);
+                  setState(() {
+                    orderValue = calculatedValue;
+                  });
+                },
+                child: Text('Podaj wycenę'),
+              ),
+              if (orderValue > 0) SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Wycena zamówienia: ${orderValue.toStringAsFixed(2)}',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),
@@ -132,5 +158,10 @@ class _CartPageState extends State<CartPage> {
   void sendJsonData() async {
     final apiService = ApiService();
     await apiService.sendJsonData(orders);
+  }
+
+  void calculateJsonData() async {
+    final apiService = ApiService();
+    await apiService.calculateJsonData(orders);
   }
 }

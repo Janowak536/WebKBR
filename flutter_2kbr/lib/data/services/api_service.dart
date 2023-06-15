@@ -200,4 +200,46 @@ class ApiService {
       print('Wystąpił błąd podczas komunikacji z API: $e');
     }
   }
+
+  Future<double> calculateJsonData(List<Order> orders) async {
+    final clientId = await getCurrentUser();
+    final List<Map<String, dynamic>> transformedData = orders.map((order) {
+      return {
+        'clientID': clientId,
+        'orderID': 0,
+        'modelID': order.modelId,
+        'colorID': order.colorId,
+        'mdfID': order.mdfId,
+        'width': order.width,
+        'height': order.height,
+        'orderValue': 0,
+      };
+    }).toList();
+
+    final jsonData = jsonEncode(transformedData);
+    print(jsonData);
+
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/Orders/CalculateOrderValue'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonData,
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResult = jsonDecode(response.body);
+        final double totalValue = jsonResult['totalValue'] ?? 0.0;
+        print('Dane zostały wysłane pomyślnie. Total Value: $totalValue');
+        return totalValue;
+      } else {
+        print('Wystąpił błąd podczas wysyłania danych: ${response.statusCode}');
+        return 0.0;
+      }
+    } catch (e) {
+      print('Wystąpił błąd podczas komunikacji z API: $e');
+      return 0.0;
+    }
+  }
 }

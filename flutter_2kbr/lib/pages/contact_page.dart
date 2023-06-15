@@ -36,7 +36,7 @@ class _ContactPageState extends State<ContactPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height / 6,
+                      height: MediaQuery.of(context).size.height / 3,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/contact.jpg'),
