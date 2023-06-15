@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_2kbr/data/models/dtos/user_register_dto.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
-import 'package:flutter_2kbr/pages/login_page.dart';
+import 'package:flutter_2kbr/pages/signinorsignup/login_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';

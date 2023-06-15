@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/pages/about_page.dart';
 import 'package:flutter_2kbr/pages/admin/client_edit_page.dart';
 import 'package:flutter_2kbr/pages/cart_page.dart';
 import 'package:flutter_2kbr/pages/contact_page.dart';
-import 'package:flutter_2kbr/pages/login_page.dart';
+import 'package:flutter_2kbr/pages/signinorsignup/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
@@ -111,8 +112,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 TextButton(
                   onPressed: () async =>
-                      await navigateWithoutAnimation(context, FrontModelPage()),
-                  child: Text('Fronty',
+                      await navigateWithoutAnimation(context, AboutPage()),
+                  child: Text('O nas',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,

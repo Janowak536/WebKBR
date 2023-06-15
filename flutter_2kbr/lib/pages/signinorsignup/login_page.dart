@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_2kbr/pages/change_password.dart';
+import 'package:flutter_2kbr/pages/signinorsignup/change_password.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
-import 'package:flutter_2kbr/pages/register_page.dart';
+import 'package:flutter_2kbr/pages/signinorsignup/register_page.dart';
 import 'package:flutter_2kbr/data/services/api_service.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
