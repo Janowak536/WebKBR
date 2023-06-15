@@ -75,6 +75,9 @@ flutter:
    - assets/images/home6.png
    - assets/images/home7.png
    - assets/images/home8.png
+   - assets/images/home9.jpg
+   - assets/images/home10.png
+   - assets/images/contact.jpg
    # assets for sills
    - assets/parapety/
    - assets/parapety/parapet_b.jpg

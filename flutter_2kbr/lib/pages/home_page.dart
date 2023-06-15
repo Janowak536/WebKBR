@@ -31,18 +31,18 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-            appBar: CustomAppBar(
-              onActionPressed: () {
-                final authProvider =
-                    Provider.of<AuthProvider>(context, listen: false);
-                if (authProvider.isLoggedIn) {
-                  authProvider.logout();
-                }
-              },
-            ),
-            body: SingleChildScrollView(
-                child: Center(
-                    child: Column(children: [
+          appBar: CustomAppBar(
+            onActionPressed: () {
+              final authProvider =
+                  Provider.of<AuthProvider>(context, listen: false);
+              if (authProvider.isLoggedIn) {
+                authProvider.logout();
+              }
+            },
+          ),
+          body: SingleChildScrollView(
+              child: Center(
+            child: Column(children: [
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -562,11 +562,57 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  SizedBox(height: 50)
                 ],
-              )
-            ]))),
-            bottomNavigationBar: Footer()));
+              ),
+              SizedBox(height: 100),
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/home9.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                height: 650,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/home10.png'),
+                              fit: BoxFit.cover,
+                            ),
+                            color: Color.fromARGB(255, 236, 114, 71),
+                          ),
+                          height: 400,
+                          width: 300,
+                          child: Padding(
+                            padding: const EdgeInsets.all(25.0),
+                            child: Text(
+                              'Posiadamy wieloletnie doświadczenie w produkcji frontów meblowych i parapetów',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Footer()
+            ]),
+          )),
+        ));
   }
 
   void _navigateToLogin() {
