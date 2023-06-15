@@ -7,7 +7,7 @@ import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/custom_appbar.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
 import 'package:provider/provider.dart';
-
+import '../widgets/footer_bar.dart';
 import 'fronts/front_model_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -562,9 +562,11 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
+                  SizedBox(height: 50)
                 ],
               )
-            ])))));
+            ]))),
+            bottomNavigationBar: Footer()));
   }
 
   void _navigateToLogin() {
