@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_2kbr/pages/colors/material_colors.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,10 +14,12 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Weather App',
         theme: ThemeData(
-          primarySwatch: myPrimarySwatchColor,
+          appBarTheme: AppBarTheme(
+            color: Color.fromARGB(255, 27, 27, 27),
+          ),
         ),
+        title: '2KBR',
         home: HomePage(),
       ),
     );
