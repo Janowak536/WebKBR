@@ -5,34 +5,34 @@ INSERT INTO Colors
 VALUES (5, 'Brzoza Rose', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (10, 'Bia³y', 'Jednobarwna', 0.00)
+VALUES (10, 'BiaÅ‚y', 'Jednobarwna', 0.00)
 
 INSERT INTO Colors
 VALUES (28, 'Olcha', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (33, 'D¹b Czarny', 'Drewnopodobna', 0.00)
+VALUES (33, 'DÄ…b Czarny', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
 VALUES (46, 'Fino Bronze', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (50, 'Orzech W³oski', 'Matowa', 0.00)
+VALUES (50, 'Orzech WÅ‚oski', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (51, 'Orzech per³a', 'Matowa', 0.00)
+VALUES (51, 'Orzech perÅ‚a', 'Matowa', 0.00)
 
 INSERT INTO Colors
 VALUES (55, 'Lancelot', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (56, 'D¹b Mat', 'Matowa', 0.00)
+VALUES (56, 'DÄ…b Mat', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (74, 'Zebrano Be¿', 'Matowa', 0.00)
+VALUES (74, 'Zebrano BeÅ¼', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (76, 'Œliwka', 'Matowa', 0.00)
+VALUES (76, 'Oliwka', 'Matowa', 0.00)
 
 INSERT INTO Colors
 VALUES (90, 'Kora Czarna', 'Matowa', 0.00)
@@ -47,13 +47,13 @@ INSERT INTO Colors
 VALUES (117, 'Antique', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (193, 'Wiœnia Ciemna', 'Drewnopodobna', 0.00)
+VALUES (193, 'WiÅ›nia Ciemna', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
 VALUES (208, 'Sheffield', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (209, 'Jaœmin', 'Jednobarwna', 0.00)
+VALUES (209, 'JaÅ›min', 'Jednobarwna', 0.00)
 
 INSERT INTO Colors
 VALUES (210, 'Cinna Wenge', 'Drewnopodobna', 0.00)
@@ -62,13 +62,13 @@ INSERT INTO Colors
 VALUES (214, 'Orzech Tabaco', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (218, 'Orzech W³oski', 'Matowa', 0.00)
+VALUES (218, 'Orzech WÅ‚oski', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (219, 'Z³oty D¹b', 'Matowa', 0.00)
+VALUES (219, 'ZÅ‚oty DÄ…b', 'Matowa', 0.00)
 
 INSERT INTO Colors
-VALUES (221, 'D¹b Bagienny', 'Matowa', 0.00)
+VALUES (221, 'DÄ…b Bagienny', 'Matowa', 0.00)
 
 INSERT INTO Colors
 VALUES (222, 'Avellino', 'Matowa', 0.00)
@@ -110,7 +110,7 @@ INSERT INTO Colors
 VALUES (260, 'Antracyt', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (261, 'Pinio Bia³a', 'Drewnopodobna', 0.00)
+VALUES (261, 'Pinio BiaÅ‚a', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
 VALUES (262, 'Pinio Krem', 'Drewnopodobna', 0.00)
@@ -137,7 +137,7 @@ INSERT INTO Colors
 VALUES (273, 'Niebieski', 'Jednobarwna', 0.00)
 
 INSERT INTO Colors
-VALUES (275, 'Pomarañczowy', 'Jednobarwna', 0.00)
+VALUES (275, 'PomaraÅ„czowy', 'Jednobarwna', 0.00)
 
 INSERT INTO Colors
 VALUES (276, 'Granite Grey', 'Jednobarwna', 0.00)
@@ -167,7 +167,7 @@ INSERT INTO Colors
 VALUES (294, 'Fresko Colorado', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (352, 'Bia³y', 'Supermat', 0.00)
+VALUES (352, 'BiaÅ‚y', 'Supermat', 0.00)
 
 INSERT INTO Colors
 VALUES (353, 'Alabaster', 'Supermat', 0.00)
@@ -215,7 +215,7 @@ INSERT INTO Colors
 VALUES (470, 'Jesion Sekwana', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (500, 'D¹b Bielony', 'Drewnopodobna', 0.00)
+VALUES (500, 'DÄ…b Bielony', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
 VALUES (501, 'Loire Oak', 'Matowa', 0.00)
@@ -248,7 +248,7 @@ INSERT INTO Colors
 VALUES (510, 'Wotan Eiche', 'Drewnopodobna', 0.00)
 
 INSERT INTO Colors
-VALUES (511, 'Bia³y Satyna', 'Matowa', 0.00)
+VALUES (511, 'BiaÅ‚y Satyna', 'Matowa', 0.00)
 
 INSERT INTO Colors
 VALUES (512, 'Granatowy', 'Matowa', 0.00)
