@@ -14,7 +14,8 @@ import 'package:flutter_2kbr/pages/fronts/front_model_page.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onActionPressed;
 
-  CustomAppBar({
+  const CustomAppBar({
+    super.key,
     required this.onActionPressed,
   });
   @override
@@ -22,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isLoggedIn = context.watch<AuthProvider>().isLoggedIn;
     bool isAdmin = Provider.of<AuthProvider>(context).isAdmin;
     return AppBar(
+      backgroundColor: Color.fromARGB(255, 27, 27, 27),
       automaticallyImplyLeading: false,
       titleSpacing: 0,
       elevation: 0,
