@@ -102,8 +102,5 @@ namespace WebKBR.API.Controllers
 
             return modelValue * colorValue * mdfValue * order.Width * order.Height;
         }
-
-
-
     }
 }

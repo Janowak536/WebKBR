@@ -83,7 +83,7 @@ class _CartPageState extends State<CartPage> {
                 onPressed: () {
                   sendJsonData();
                 },
-                child: Text('Wyślij JSON'),
+                child: Text('Wyślij Zamówienie'),
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -94,7 +94,7 @@ class _CartPageState extends State<CartPage> {
                     orderValue = calculatedValue;
                   });
                 },
-                child: Text('Podaj wycenę'),
+                child: Text('Wyceń zamówienie'),
               ),
               if (orderValue > 0) SizedBox(height: 20),
               Container(

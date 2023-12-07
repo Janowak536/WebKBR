@@ -24,15 +24,17 @@ class _SillSizePageState extends State<SillSizePage> {
   List<Order> orders = [];
   List<Mdf> mdfItems = [
     Mdf(id: 0, name: ''),
-    Mdf(id: 1, name: '2'),
-    Mdf(id: 4, name: '4'),
-    Mdf(id: 6, name: '6'),
+    Mdf(id: 1, name: '18'),
+    Mdf(id: 4, name: '19'),
+    Mdf(id: 6, name: '22'),
+    Mdf(id: 1, name: '25'),
+    Mdf(id: 1, name: '28'),
+    Mdf(id: 1, name: '30'),
   ];
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
       child: Scaffold(
         appBar: CustomAppBar(
           onActionPressed: () => authProvider.isLoggedIn
@@ -54,7 +56,7 @@ class _SillSizePageState extends State<SillSizePage> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text('Grubość parapetu'),
+                                Text('Grubość parapetu w mm'),
                                 DropdownButton<Mdf>(
                                   value: mdfItems.firstWhere(
                                     (item) => item.id == widget.order.mdfId,
@@ -85,7 +87,7 @@ class _SillSizePageState extends State<SillSizePage> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text('Wysokość'),
+                                Text('Wysokość w mm'),
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.2,
@@ -102,7 +104,7 @@ class _SillSizePageState extends State<SillSizePage> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text('Szerokość'),
+                                Text('Szerokość w mm'),
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.2,
@@ -132,7 +134,7 @@ class _SillSizePageState extends State<SillSizePage> {
                                   Order newOrder = widget.order.copyWith(
                                       height: height,
                                       width: width,
-                                      type: "sill");
+                                      type: "parapet");
                                   orders.add(newOrder);
                                   addOrder(newOrder);
                                   heightController.clear();
@@ -151,6 +153,7 @@ class _SillSizePageState extends State<SillSizePage> {
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               height: MediaQuery.of(context).size.height * 0.5,
+              padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -159,18 +162,26 @@ class _SillSizePageState extends State<SillSizePage> {
                 itemCount: orders.length,
                 itemBuilder: (context, index) {
                   final order = orders[index];
-                  return ListTile(
-                    title: Text(
-                      'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
+                  return Container(
+                    margin: EdgeInsets.only(top: 8.0, left: 18.0, right: 18.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        setState(() {
-                          removeOrder(order);
-                          orders.removeAt(index);
-                        });
-                      },
+                    child: ListTile(
+                      leading: Icon(Icons.border_all),
+                      title: Text(
+                        'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            removeOrder(order);
+                            orders.removeAt(index);
+                          });
+                        },
+                      ),
                     ),
                   );
                 },
@@ -180,7 +191,9 @@ class _SillSizePageState extends State<SillSizePage> {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: EdgeInsets.only(top: 10.0, right: 20.0),
-                  child: FloatingActionButton(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange),
                     child: Icon(Icons.navigate_next),
                     onPressed: () => _navigateToCartPage(),
                   ),
