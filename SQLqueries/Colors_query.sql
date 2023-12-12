@@ -256,4 +256,10 @@ VALUES (512, 'Granatowy', 'Matowa', 0.00)
 INSERT INTO Colors
 VALUES (513, 'Antique Oak', 'Drewnopodobna', 0.00)
 
+UPDATE Colors
+SET Value = 10
+WHERE Type = 'Drewnopodobna'
 
+UPDATE Colors 
+SET Value = 20 
+WHERE Type = 'Matowa' OR Type = 'Supermat'
