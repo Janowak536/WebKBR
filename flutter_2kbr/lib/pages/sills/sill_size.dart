@@ -23,7 +23,6 @@ class _SillSizePageState extends State<SillSizePage> {
   TextEditingController widthController = TextEditingController();
   List<Order> orders = [];
   List<Mdf> mdfItems = [
-    Mdf(id: 0, name: ''),
     Mdf(id: 1, name: '18'),
     Mdf(id: 4, name: '19'),
     Mdf(id: 6, name: '22'),
@@ -45,110 +44,107 @@ class _SillSizePageState extends State<SillSizePage> {
           children: <Widget>[
             Padding(
                 padding: EdgeInsets.all(20),
-                child: Opacity(
-                  opacity: 0.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text('Grubość parapetu w mm'),
-                                DropdownButton<Mdf>(
-                                  value: mdfItems.firstWhere(
-                                    (item) => item.id == widget.order.mdfId,
-                                    orElse: () => mdfItems[0],
-                                  ),
-                                  onChanged: (Mdf? newValue) {
-                                    if (newValue != null) {
-                                      setState(() {
-                                        widget.order.mdfId = newValue.id;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        widget.order.mdfId = 1;
-                                      });
-                                    }
-                                  },
-                                  items: mdfItems
-                                      .map<DropdownMenuItem<Mdf>>((Mdf item) {
-                                    return DropdownMenuItem<Mdf>(
-                                      value: item,
-                                      child: Text(item.name),
-                                    );
-                                  }).toList(),
-                                )
-                              ],
-                            ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text('Grubość parapetu w mm'),
+                              DropdownButton<Mdf>(
+                                value: mdfItems.firstWhere(
+                                  (item) => item.id == widget.order.mdfId,
+                                  orElse: () => mdfItems[0],
+                                ),
+                                onChanged: (Mdf? newValue) {
+                                  if (newValue != null) {
+                                    setState(() {
+                                      widget.order.mdfId = newValue.id;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      widget.order.mdfId = 1;
+                                    });
+                                  }
+                                },
+                                items: mdfItems
+                                    .map<DropdownMenuItem<Mdf>>((Mdf item) {
+                                  return DropdownMenuItem<Mdf>(
+                                    value: item,
+                                    child: Text(item.name),
+                                  );
+                                }).toList(),
+                              )
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text('Wysokość w mm'),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.2,
-                                  child: TextFormField(
-                                    controller: heightController,
-                                    decoration: InputDecoration(
-                                      hintText: "Wprowadź wysokość",
-                                    ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text('Wysokość w mm'),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: TextFormField(
+                                  controller: heightController,
+                                  decoration: InputDecoration(
+                                    hintText: "Wprowadź wysokość",
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Text('Szerokość w mm'),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.2,
-                                  child: TextFormField(
-                                    controller: widthController,
-                                    decoration: InputDecoration(
-                                      hintText: "Wprowadź szerokość",
-                                    ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text('Szerokość w mm'),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                child: TextFormField(
+                                  controller: widthController,
+                                  decoration: InputDecoration(
+                                    hintText: "Wprowadź szerokość",
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 10.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  final height =
-                                      int.tryParse(heightController.text) ?? 0;
-                                  final width =
-                                      int.tryParse(widthController.text) ?? 0;
-                                  Order newOrder = widget.order.copyWith(
-                                      height: height,
-                                      width: width,
-                                      type: "parapet");
-                                  orders.add(newOrder);
-                                  addOrder(newOrder);
-                                  heightController.clear();
-                                  widthController.clear();
-                                  print(jsonEncode(newOrder.toJson()));
-                                });
-                              },
-                              child: Text('Dodaj do listy'),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.orange),
+                        ),
+                      ],
+                    ),
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                final height =
+                                    int.tryParse(heightController.text) ?? 0;
+                                final width =
+                                    int.tryParse(widthController.text) ?? 0;
+                                Order newOrder = widget.order.copyWith(
+                                    height: height,
+                                    width: width,
+                                    type: "parapet");
+                                addOrderToList(newOrder);
+                                heightController.clear();
+                                widthController.clear();
+                                print(jsonEncode(newOrder.toJson()));
+                              });
+                            },
+                            child: Text(
+                              'Dodaj do listy',
+                              style: TextStyle(color: Colors.white),
                             ),
-                          )),
-                    ],
-                  ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange),
+                          ),
+                        )),
+                  ],
                 )),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
@@ -177,8 +173,7 @@ class _SillSizePageState extends State<SillSizePage> {
                         icon: Icon(Icons.delete),
                         onPressed: () {
                           setState(() {
-                            removeOrder(order);
-                            orders.removeAt(index);
+                            removeOrderFromList(order);
                           });
                         },
                       ),
@@ -194,8 +189,14 @@ class _SillSizePageState extends State<SillSizePage> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange),
-                    child: Icon(Icons.navigate_next),
-                    onPressed: () => _navigateToCartPage(),
+                    child: Text(
+                      'Dodaj listę do koszyka',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      addOrder(orders);
+                      _navigateToCartPage();
+                    },
                   ),
                 ))
           ],
@@ -204,17 +205,20 @@ class _SillSizePageState extends State<SillSizePage> {
     );
   }
 
-  void addOrder(Order order) {
+  void addOrder(List<Order> orders) {
     List<Order> ordersFromStorage = getOrdersFromStorage();
-    ordersFromStorage.add(order);
+    ordersFromStorage.addAll(orders);
     html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
         .map<Map<String, dynamic>>((order) => order.toJson())
         .toList());
   }
 
-  void removeOrder(Order order) {
-    List<Order> ordersFromStorage = getOrdersFromStorage();
-    ordersFromStorage.removeWhere((o) =>
+  void addOrderToList(Order order) {
+    orders.add(order);
+  }
+
+  void removeOrderFromList(Order order) {
+    orders.removeWhere((o) =>
         o.model == order.model &&
         o.color == order.color &&
         o.mdf == order.mdf &&
@@ -224,9 +228,6 @@ class _SillSizePageState extends State<SillSizePage> {
         o.modelId == order.modelId &&
         o.colorId == order.colorId &&
         o.mdfId == order.mdfId);
-    html.window.localStorage['orders'] = jsonEncode(ordersFromStorage
-        .map<Map<String, dynamic>>((order) => order.toJson())
-        .toList());
   }
 
   List<Order> getOrdersFromStorage() {
