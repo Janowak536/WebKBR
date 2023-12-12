@@ -1,5 +1,5 @@
---INSERT INTO Models (ModelName, Type, Value)
---VALUES ('ABO', 'Fronty frezowane', 0 )
+INSERT INTO Models (ModelName, Type, Value)
+VALUES ('ABO', 'Fronty frezowane', 0 )
 
 INSERT INTO Models (ModelName, Type, Value)
 VALUES ('Andros', 'Fronty frezowane', 0 )
