@@ -1,90 +1,65 @@
-INSERT INTO Clients
-Values ('Mikea Tychy', '6462323539', '48322180371', 'BIURO@MIKEA.EU', 'ul.Mikołowska 112', 'Tychy', '43-100', 'Salon okienny', 'so15', 'biuro@mikea.eu', 'mikea2023', 'Klient')
+INSERT INTO Clients 
+Values
+('Mikea Tychy', 6462323539, '48322180371', 'BIURO@MIKEA.EU', 'ul.Mikołowska 112', 'Tychy', '43-100', 'Salon okienny', 'so15', 'biuro@mikea.eu', 'mikea2023', 'Klient'),
+('KORNER Sp. z o.o', 7721966570, '446852649', 'sekretariat@korner.pl', 'ul Kochanowskiego 2c', 'Radomsko', '97-500', 'Hurtownia meblowa', 'hm15', 'sekretariat@korner.pl', 'korner2023', 'Klient'),
+('Meblomet', NULL, '515937101', 'meblomet@meblomet.pl', 'ul. Kościuszki 76', 'Kęty', '32–650', 'Hurtownia meblowa', 'hm15', 'meblomet@meblomet.pl', 'meblomet2023', 'Klient'),
+('OKNO-POL sp. z o.o.', NULL, '48122562800', 'biuro@okno-pol.pl', 'Mników 402A', 'Morawica', '32-084', 'Producent', 'po20', 'biuro@okno-pol.pl', 'oknopol2023', 'Klient'),
+('U.G. Kozioł sp. jw.', NULL, '509112826', 'biuro@oknakoziol.pl', 'ul. Konstytucji 3-go Maja 40', 'Łazy', '42-450', 'Producent', 'po20', 'biuro@oknakoziol.pl', 'koziol2023', 'Klient'),
+('Marpol', NULL, '322602063', 'biuro@solidnafirma.com', 'ul. Jana III Sobieskiego 12', 'Dąbrowa Górnicza', '41-300', 'Salon okienny', 'so15', 'biuro@solidnafirma.com', 'marpol2023', 'Klient'),
+('Strefa Płyt - GKFactory', '886 333 294', NULL, 'strefaplyt@gkfactory.pl', 'ul. Pilska 2', 'Szczecinek', '78-400', 'Hurtownia meblowa', 'hm20', 'strefaplyt@gkfactory.pl', 'gkfactory2023', 'Klient'),
+('PWMTrade', NULL, '536589550', 'wyceny.pwmtrade@gmail.com', 'Ul. Skośna 15', 'Tarnowskie Góry', '42-600', 'Salon okienny', 'so15', 'wyceny.pwmtrade@gmail.com', 'pwmtrade2023', 'Klient'),
+('Ideal', '609522607', NULL, NULL, 'Tymawa 38c', 'Tymawa', '83-140', 'Hurtownia parapetów', 'hp20', 'biuro@ideal.pl', 'ideal2023', 'Klient'),
+('Romex', '228190000', NULL, 'biuro@romexwarszawa.pl', 'ul. Czeremchowa 7b', 'Warszawa', '03-159', 'Hurtownia parapetów', 'hp20', 'biuro@romexwarszawa.pl', 'romex2023', 'Klient'),
+('Eko-bud', '227871646', NULL, 'wolomin@eko-bud.com.pl', 'ul. 1-go Maja 26B', 'Wołomin', NULL, 'Salon okienny', 'so10', 'wolomin@eko-bud.com.pl', 'ekobud2023', 'Klient'),
+('Cama', '509 221 024', NULL, 'biuro@camaokna.pl', 'ul.Przemysłowa 54/24', 'Wola Rębkowska', '08-410', 'Salon okienny', 'so15', 'biuro@camaokna.pl', 'cama2023', 'Klient'),
+('Stolarstwo Nowak', '602 749 033', NULL, 'biuro.stolarstwonowak@gmail.com', 'ul Bukowska 20', 'Szewce', '64-320', 'Stolarz', 'st15', 'biuro.stolarstwonowak@gmail.com', 'nowak2023', 'Klient'),
+('Dekor-płyt Sp. z o.o.', '7272380718', '426887570', 'biuro@dekor-plyt.pl', 'ul. Elektronowa 4', 'Łódź', '94-103', 'Hurtownia meblowa', 'hm20', 'biuro@dekor-plyt.pl', 'dekor2023', 'Klient'),
+('Stolarstwo FHU Dariusz Grzelka', NULL, '693720747', NULL, 'Daleszyn 42a', 'Daleszyn', '63-800', 'Stolarz', 'st15', NULL, NULL, 'Klient'),
+('Przedsiębiorstwo Budowlane AMBIT Sp. z o.o.', NULL, '48655389900', 'ambit@ambit.com.pl', 'ul. Kąkolewska 21', 'Leszno', '64-100', 'Hurtownia parapetów', 'hp20', 'ambit@ambit.com.pl', 'ambit2023', 'Klient'),
+('Świat okien', '502 674 818', NULL, 'biuro@swiatokien.com', 'ul. Targowa 6', 'Ostrołęka', '07-410', 'Salon okienny', 'so15', 'biuro@swiatokien.com', 'swiatokien2023', 'Klient'),
+('HU K.LIPKOWSKI', '7351555862', '609098126', 'biuro@lipkowski.eu', 'ul. Ludźmierska 22', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@lipkowski.eu', 'lipkowski2023', 'Klient'),
+('InterFix Sp. z o.o. Sp. k.', '6793087073', '48126534800', 'biuro@intersill.pl', 'ul. Obrońców Modlina 7D', 'Kraków', '30-733', 'Hurtowania parapetów', 'hp15', 'biuro@intersill.pl', 'interfix2023', 'Klient'),
+('Okienne Innowacje', '660 175 555', NULL, 'biuro@okienneinnowacje.pl', 'ul. Bulwarowa 2', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@okienneinnowacje.pl', 'okienneinnowacje2023', 'Klient'),
+('METECO Nowy Targ Partner ALUTECH', NULL, '602584973', 'biuro@alutech24.pl', 'ul. Szaflarska 136', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@alutech24.pl', 'alutech2023', 'Klient'),
+('F.H.U. “MK-OPO” s.c.', NULL, '600858581', 'mkopo@op.pl', 'ul. Z.Krasińskiego 8', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'mkopo@op.pl', 'mkopo2023', 'Klient'),
+('OKNOLUX TARNÓW', NULL, '146740800', 'BIURO.TARNOW@OKNOLUX.COM.PL', 'UL. STRUSIŃSKA 2', 'TARNÓW', '33-100', 'Salon okienny', 'so10', 'BIURO.TARNOW@OKNOLUX.COM.PL', 'oknoluxtarnow2023', 'Klient'),
+('Hanbud', NULL, '126400990', 'biuro@hanbud.com.pl', 'os. Niepodległości 3', 'Kraków', NULL, 'Salon okienny', 'so10', 'biuro@hanbud.com.pl', 'hanbud2023', 'Klient'),
+('Elwi', NULL, '533563498', 'elwi@elwi.pl', 'ul. Wenedów 3E', 'Koszalin', '75-847', 'Hurtownia meblowa', 'hm20', 'elwi@elwi.pl', 'elwi2023', 'Klient'),
+('PW OKNA I DRZWI PCV PAULINA WENCEPEL', '6462845634', '668269619', 'biuro@pwokna.pl', 'ul. Mikołowska 137', 'Tychy', '43-100', 'Salon okienny', 'so10', 'biuro@pwokna.pl', 'pwokna2023', 'Klient'),
+('P.U.P.H. Basta', '503 535 777', NULL, 'bastalublin@gmail.com', 'UL. ZEMBORZYCKA 37', 'LUBLIN', '20-445', 'Hurtownia meblowa', 'hm15', 'bastalublin@gmail.com', 'basta2023', 'Klient'),
+('BIELPAR', '9161153914', '48334703000', 'biuro@bielpar.pl', 'ul. Grażyńskiego 12', 'Bielsko Biała', '43-300', 'Hurtownia parapetów', 'hp20', 'biuro@bielpar.pl', 'bielpar2023', 'Klient'),
+('Eleganckie Okna', '1234567890', '987654321', 'eleganckieokna@example.com', 'ul. Słoneczna 1', 'Warszawa', '00-001', 'Salon okienny', 'DISCOUNT10', 'eleganckieokna_user', 'password123', NULL),
+('MebleDesign', '2345678901', '876543210', 'mebledesign@example.com', 'ul. Meblarska 2', 'Kraków', '30-002', 'Hurtownia meblowa', 'DISCOUNT20', 'mebledesign_user', 'password456', NULL),
+('ParapetyPremium', '3456789012', '765432109', 'parapetypremium@example.com', 'ul. Słoneczna 3', 'Gdańsk', '80-003', 'Hurtownia parapetów', 'DISCOUNT15', 'parapetypremium_user', 'password789', NULL),
+('StolarzPro', '4567890123', '654321098', 'stolarzpro@example.com', 'ul. Rzemieślnicza 4', 'Poznań', '60-004', 'Stolarz', 'DISCOUNT25', 'stolarzpro_user', 'passwordabc', NULL),
+('NowoczesneOkna', '5678901234', '543210987', 'nowoczesneokna@example.com', 'ul. Słowiańska 5', 'Łódź', '90-005', 'Salon okienny', 'DISCOUNT30', 'nowoczesneokna_user', 'passworddef', NULL),
+('Salon Okien Elegancja', '1234567890', '987654321', 'elegancja@example.com', 'ul. Słoneczna 1', 'Warszawa', '00-001', 'Salon okienny', 'DISCOUNT10', 'elegancja_user', 'password123', NULL),
+('Hurtownia Meblowa Styl', '2345678901', '876543210', 'styl@example.com', 'ul. Meblarska 2', 'Kraków', '30-002', 'Hurtownia meblowa', 'DISCOUNT20', 'styl_user', 'password456', NULL),
+('Parapety Deluxe', '3456789012', '765432109', 'deluxe@example.com', 'ul. Słoneczna 3', 'Gdańsk', '80-003', 'Hurtownia parapetów', 'DISCOUNT15', 'deluxe_user', 'password789', NULL),
+('Mistrz Stolarski', 4567890123, 654321098, 'mistrzstolarz@example.com', 'ul. Rzemieślnicza 4', 'Poznań', '60-004', 'Stolarz', 'DISCOUNT25', 'mistrzstolarz_user', 'passwordabc', NULL),
+('Okna EkoStyle', 5678901234, 543210987, 'ekostyle@example.com', 'ul. Słowiańska 5', 'Łódź', '90-005', 'Salon okienny', 'DISCOUNT30', 'ekostyle_user', 'passworddef', NULL),
+('HurtMeble24', 6789012345, 432109876, 'hurtmeble24@example.com', 'ul. Handlowa 6', 'Wrocław', '50-006', 'Hurtownia meblowa', 'DISCOUNT12', 'hurtmeble24_user', 'passwordghi', NULL),
+('ParapetyPro', 7890123456, 321098765, 'parapetypro@example.com', 'ul. Rynkowska 7', 'Szczecin', '70-007', 'Hurtownia parapetów', 'DISCOUNT18', 'parapetypro_user', 'passwordjkl', NULL),
+('Stolarnia SzybkiRękaw', 8901234567, 210987654, 'szybkirekaw@example.com', 'ul. Rzemieślnicza 8', 'Kraków', '30-009', 'Stolarz', 'DISCOUNT22', 'szybkirekaw_user', 'passwordmno', NULL),
+('InnowacyjneOkna', 9012345678, 109876543, 'innowacyjneokna@example.com', 'ul. Postępowa 10', 'Poznań', '60-010', 'Salon okienny', 'DISCOUNT15', 'innowacyjneokna_user', 'passwordpqr', NULL),
+('MebleDesignNowoczesne', 0123456789, 987654321, 'designnowoczesne@example.com', 'ul. Awangardowa 12', 'Warszawa', '00-012', 'Hurtownia meblowa', 'DISCOUNT28', 'designnowoczesne_user', 'passwordstu', NULL),
+('Salon Okienny Elegancja', 1234567890, 987654321, 'elegancja@example.com', 'ul. Słoneczna 1', 'Warszawa', '00-001', 'Salon okienny', 'DISCOUNT10', 'salonelegancja_user', 'password123', NULL),
+('Hurtownia Meblowa StylNowoczesny', 2345678901, 876543210, 'styl@example.com', 'ul. Meblarska 2', 'Kraków', '30-002', 'Hurtownia meblowa', 'DISCOUNT20', 'nowoczesnystyl_user', 'password456', NULL),
+('Parapety DeluxeHurt', 3456789012, 765432109, 'deluxe@example.com', 'ul. Słoneczna 3', 'Gdańsk', '80-003', 'Hurtownia parapetów', 'DISCOUNT15', 'deluxehurt_user', 'password789', NULL),
+('Mistrz StolarskiProdukcja', 4567890123, 654321098, 'mistrzstolarz@example.com', 'ul. Rzemieślnicza 4', 'Poznań', '60-004', 'Stolarz', 'DISCOUNT25', 'mistrzstolarslo_user', 'passwordabc', NULL),
+('Okna EkoStyleWyjątkowe', 5678901234, 543210987, 'ekostyle@example.com', 'ul. Słowiańska 5', 'Łódź', '90-005', 'Salon okienny', 'DISCOUNT30', 'ekostylewyjatkowe_user', 'passworddef', NULL),
+('HurtMeble24Nowoczesne', 6789012345, 432109876, 'hurtmeble24@example.com', 'ul. Handlowa 6', 'Wrocław', '50-006', 'Hurtownia meblowa', 'DISCOUNT12', 'hurtmeble24nowoczesne_user', 'passwordghi', NULL),
+('ParapetyProInnowacyjne', 7890123456, 321098765, 'parapetypro@example.com', 'ul. Rynkowska 7', 'Szczecin', '70-007', 'Hurtownia parapetów', 'DISCOUNT18', 'parapetyproinnowacyjne_user', 'passwordjkl', NULL),
+('Stolarnia SzybkiRękawProducent', 8901234567, 210987654, 'szybkirekaw@example.com', 'ul. Rzemieślnicza 8', 'Kraków', '30-009', 'Stolarz', 'DISCOUNT22', 'szybkirekawproducent_user', 'passwordmno', NULL),
+('InnowacyjneOknaPremium', 9012345678, 109876543, 'innowacyjneokna@example.com', 'ul. Postępowa 10', 'Poznań', '60-010', 'Salon okienny', 'DISCOUNT15', 'innowacyjneoknapremium_user', 'passwordpqr', NULL),
+('MebleDesignNowoczesneLuksus', 0123456789, 987654321, 'designnowoczesne@example.com', 'ul. Awangardowa 12', 'Warszawa', '00-012', 'Hurtownia meblowa', 'DISCOUNT28', 'mebledesignnowoczesne_user', 'passwordstu', NULL),
+('EleganckieFrontyEko', 1234567801, 876543210, 'frontyeko@example.com', 'ul. Ekologiczna 15', 'Gdynia', '81-002', 'Salon okienny', 'DISCOUNT10', 'eleganckiefrontyeko_user', 'passwordxyz', NULL),
+('SklepMeblowyNowyStyl', 2345678902, 765432109, 'nowystyl@example.com', 'ul. Meblowa 20', 'Katowice', '40-003', 'Hurtownia meblowa', 'DISCOUNT20', 'sklepmeblowynowystyl_user', 'passwordabc', NULL),
+('ParapetyIdealne', 3456789013, 654321098, 'idealne@example.com', 'ul. Idealna 30', 'Zielona Góra', '65-004', 'Hurtownia parapetów', 'DISCOUNT15', 'parapetyidealne_user', 'passworddef', NULL),
+('MistrzStolarzDrewnoArt', 4567890124, 543210987, 'drewnoart@example.com', 'ul. Rzemieślnicza 40', 'Lublin', '20-005', 'Stolarz', 'DISCOUNT25', 'mistrzstolarzdrewnoart_user', 'passwordghi', NULL),
+('OknaZTradycją', 5678901235, 432109876, 'tradycja@example.com', 'ul. Tradycyjna 50', 'Bydgoszcz', '85-006', 'Salon okienny', 'DISCOUNT30', 'oknaztradycja_user', 'passwordjkl', NULL),
+('2KBR', 8691995572, 667668617, 'biuro@2kbr.pl', 'ul.Grabska 12', 'Niepołomice', '32-002', 'Właściciel', NULL, '2kbr_admin', '2kbr_admin', 'Admin');
 
-INSERT INTO Clients
-Values ('KORNER Sp. z o.o', '7721966570', '446852649', 'sekretariat@korner.pl', 'ul Kochanowskiego 2c', 'Radomsko', '97-500', 'Hurtownia meblowa', 'hm15', 'sekretariat@korner.pl', 'korner2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Meblomet', '', '515937101', 'meblomet@meblomet.pl', 'ul. Kościuszki 76', 'Kęty', '32–650', 'Hurtownia meblowa', 'hm15', 'meblomet@meblomet.pl', 'meblomet2023', 'Klient')
-
-INSERT INTO Clients
-Values ('OKNO-POL sp. z o.o.', '', '48122562800', 'biuro@okno-pol.pl', 'Mników 402A', 'Morawica', '32-084', 'Producent', 'po20', 'biuro@okno-pol.pl', 'oknopol2023', 'Klient')
-
-INSERT INTO Clients
-Values ('U.G. Kozioł sp. jw.', '', '509112826', 'biuro@oknakoziol.pl', 'ul. Konstytucji 3-go Maja 40', 'Łazy', '42-450', 'Producent', 'po20', 'biuro@oknakoziol.pl', 'koziol2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Marpol', '', '322602063', 'biuro@solidnafirma.com', 'ul. Jana III Sobieskiego 12', 'Dąbrowa Górnicza', '41-300','Salon okienny', 'so15', 'biuro@solidnafirma.com', 'marpol2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Strefa Płyt - GKFactory', '', '886 333 294', 'strefaplyt@gkfactory.pl', 'ul. Pilska 2', 'Szczecinek', '78-400', 'Hurtownia meblowa', 'hm20', 'strefaplyt@gkfactory.pl', 'gkfactory2023', 'Klient')
-
-INSERT INTO Clients
-Values ('PWMTrade', '', '536589550', 'wyceny.pwmtrade@gmail.com', 'Ul. Skośna 15', 'Tarnowskie Góry', '42-600', 'Salon okienny', 'so15', 'wyceny.pwmtrade@gmail.com', 'pwmtrade2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Ideal', '', '609522607', '', 'Tymawa 38c', 'Tymawa', '83-140', 'Hurtownia parapetów', 'hp20', 'biuro@ideal.pl', 'ideal2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Romex', '', '228190000', 'biuro@romexwarszawa.pl', 'ul. Czeremchowa 7b', 'Warszawa', '03-159', 'Hurtownia parapetów', 'hp20', 'biuro@romexwarszawa.pl', 'romex2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Eko-bud', '', '227871646', 'wolomin@eko-bud.com.pl', 'ul. 1-go Maja 26B', 'Wołomin', '', 'Salon okienny', 'so10', 'wolomin@eko-bud.com.pl', 'ekobud2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Cama', '', '509 221 024', 'biuro@camaokna.pl', 'ul.Przemysłowa 54/24', 'Wola Rębkowska', '08-410', 'Salon okienny', 'so15', 'biuro@camaokna.pl', 'cama2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Stolarstwo Nowak', '', '602 749 033', 'biuro.stolarstwonowak@gmail.com', 'ul Bukowska 20', 'Szewce', '64-320', 'Stolarz', 'st15', 'biuro.stolarstwonowak@gmail.com', 'nowak2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Dekor-płyt Sp. z o.o.', '7272380718', '426887570', 'biuro@dekor-plyt.pl', 'ul. Elektronowa 4', 'Łódź', '94-103', 'Hurtownia meblowa', 'hm20', 'biuro@dekor-plyt.pl', 'dekor2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Stolarstwo FHU Dariusz Grzelka', NULL, '693720747', NULL, 'Daleszyn 42a', 'Daleszyn', '63-800', 'Stolarz', 'st15', '', '', 'Klient')
-
-INSERT INTO Clients
-Values ('Przedsiębiorstwo Budowlane AMBIT Sp. z o.o.', NULL, '48655389900', 'ambit@ambit.com.pl', 'ul. Kąkolewska 21', 'Leszno', '64-100', 'Hurtownia parapetów', 'hp20', 'ambit@ambit.com.pl', 'ambit2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Świat okien', NULL, '502 674 818', 'biuro@swiatokien.com', 'ul. Targowa 6', 'Ostrołęka', '07-410', 'Salon okienny', 'so15', 'biuro@swiatokien.com', 'swiatokien2023', 'Klient')
-
-INSERT INTO Clients
-Values ('HU K.LIPKOWSKI', '7351555862', '609098126', 'biuro@lipkowski.eu', 'ul. Ludźmierska 22', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@lipkowski.eu', 'lipkowski2023', 'Klient')
-
-INSERT INTO Clients
-Values ('InterFix Sp. z o.o. Sp. k.', '6793087073', '48126534800', 'biuro@intersill.pl', 'ul. Obrońców Modlina 7D', 'Kraków', '30-733', 'Hurtowania parapetów', 'hp15', 'biuro@intersill.pl', 'interfix2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Okienne Innowacje', NULL, '660 175 555', 'biuro@okienneinnowacje.pl', 'ul. Bulwarowa 2', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@okienneinnowacje.pl', 'okienneinnowacje2023', 'Klient')
-
-INSERT INTO Clients
-Values ('METECO Nowy Targ Partner ALUTECH', NULL, '602584973', 'biuro@alutech24.pl', 'ul. Szaflarska 136', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'biuro@alutech24.pl', 'alutech2023', 'Klient')
-
-INSERT INTO Clients
-Values ('F.H.U. “MK-OPO” s.c.', NULL, '600858581', 'mkopo@op.pl', 'ul. Z.Krasińskiego 8', 'Nowy Targ', '34-400', 'Salon okienny', 'so10', 'mkopo@op.pl', 'mkopo2023', 'Klient')
-
-INSERT INTO Clients
-Values ('OKNOLUX TARNÓW', NULL, '146740800', 'BIURO.TARNOW@OKNOLUX.COM.PL', 'UL. STRUSIŃSKA 2', 'TARNÓW', '33-100', 'Salon okienny', 'so10', 'BIURO.TARNOW@OKNOLUX.COM.PL', 'oknoluxtarnow2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Hanbud', NULL, '126400990', 'biuro@hanbud.com.pl', 'os. Niepodległości 3', 'Kraków', NULL, 'Salon okienny', 'so10', ' biuro@hanbud.com.pl', 'hanbud2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Elwi', NULL, '533563498', 'elwi@elwi.pl', 'ul. Wenedów 3E', 'Koszalin', '75-847', 'Hurtownia meblowa', 'hm20', 'elwi@elwi.pl', 'elwi2023', 'Klient')
-
-INSERT INTO Clients
-Values ('PW OKNA I DRZWI PCV PAULINA WENCEPEL', '6462845634', '668269619', 'biuro@pwokna.pl', 'ul. Mikołowska 137', 'Tychy', '43-100', 'Salon okienny', 'so10', 'biuro@pwokna.pl', 'pwokna2023', 'Klient')
-
-INSERT INTO Clients
-Values ('P.U.P.H. Basta', NULL, '503 535 777', 'bastalublin@gmail.com', 'UL. ZEMBORZYCKA 37', 'LUBLIN', '20-445', 'Hurtownia meblowa', 'hm15', 'bastalublin@gmail.com', 'basta2023', 'Klient')
-
-INSERT INTO Clients
-Values ('Hurtownia art. do produkcji meblarskiej A.K. Kroteccy', '6670000614', '730939001', 'biuro@kroteccy.pl', 'Wyszyńskiego 16', 'Strzałkowo', '62-420', 'Hurtownia meblowa', 'hm20', 'biuro@kroteccy.pl', 'kroteccy2023', 'Klient')
-
-INSERT INTO Clients
-Values ('BIELPAR', '9161153914', '48334703000', 'biuro@bielpar.pl', 'ul. Grażyńskiego 12', 'Bielsko Biała', '43-300', 'Hurtownia parapetów', 'hp20', 'biuro@bielpar.pl', 'bielpar2023', 'Klient')
-
-
-
-
+UPDATE Clients
+SET UserRole = 'Klient'
+WHERE Name <> '2KBR'
