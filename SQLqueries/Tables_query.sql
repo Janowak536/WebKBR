@@ -50,3 +50,8 @@ CREATE table Orders (
 	--constraint height_check
 		--check(height > 0 and height < 2750)
 )
+CREATE TABLE OrderStatus (
+    OrderStatusID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    OrderID int NOT NULL,
+    Status varchar(50)
+);

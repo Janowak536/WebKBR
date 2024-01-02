@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2kbr/pages/admin/client_order_page.dart';
 import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/pages/home_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
@@ -67,6 +68,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       icon: Icon(Icons.edit),
                       onPressed: () async => await navigateWithoutAnimation(
                           context, ClientEditPage()),
+                    ),
+                  if (isAdmin)
+                    IconButton(
+                      color: Colors.white,
+                      icon: Icon(Icons.online_prediction_rounded),
+                      onPressed: () async => await navigateWithoutAnimation(
+                          context, ClientOrderPage()),
                     ),
                   IconButton(
                     icon: Icon(Icons.shopping_cart),

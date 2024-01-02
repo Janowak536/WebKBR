@@ -12,7 +12,12 @@ import 'package:provider/provider.dart';
 class FrontSizePage extends StatefulWidget {
   Order order;
 
-  FrontSizePage({required this.order});
+  FrontSizePage({Key? key, required this.order}) : super(key: key) {
+    // Set the default mdfId to 1 if not already set
+    if (order.mdfId == null || order.mdfId == 0) {
+      order.mdfId = 1;
+    }
+  }
 
   @override
   _FrontSizePageState createState() => _FrontSizePageState();
@@ -55,7 +60,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                               DropdownButton<Mdf>(
                                 value: mdfItems.firstWhere(
                                   (item) => item.id == widget.order.mdfId,
-                                  orElse: () => mdfItems[0],
+                                  orElse: () => mdfItems.first,
                                 ),
                                 onChanged: (Mdf? newValue) {
                                   if (newValue != null) {
@@ -137,6 +142,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                             child: Text(
                               'Dodaj do listy',
                               style: TextStyle(color: Colors.white),
+                              //tutaj chcemy uderzyć do api i wycenić jeden element
                             ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange),
@@ -215,16 +221,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
   }
 
   void removeOrderFromList(Order order) {
-    orders.removeWhere((o) =>
-        o.model == order.model &&
-        o.color == order.color &&
-        o.mdf == order.mdf &&
-        o.height == order.height &&
-        o.width == order.width &&
-        o.type == order.type &&
-        o.modelId == order.modelId &&
-        o.colorId == order.colorId &&
-        o.mdfId == order.mdfId);
+    orders.remove(order);
   }
 
   List<Order> getOrdersFromStorage() {

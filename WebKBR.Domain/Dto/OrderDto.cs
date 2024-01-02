@@ -31,6 +31,7 @@ namespace WebKBR.Domain.Dto
         public short Height { get; set; }
 
         [Required]
-        public decimal OrderValue { get; set; } = 1;
+        public decimal OrderValue { get; set; }
+        public string? OrderStatus { get; set; }
     }
 }

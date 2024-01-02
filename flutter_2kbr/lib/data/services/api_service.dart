@@ -161,6 +161,46 @@ class ApiService {
     }
   }
 
+  Future<dynamic> getOrder() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jwt = prefs.getString('jwt');
+    if (jwt == null) {
+      throw Exception('JWT token not found');
+    }
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/Orders'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get orders for user');
+    }
+  }
+
+  Future<dynamic> getOrderById(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jwt = prefs.getString('jwt');
+    if (jwt == null) {
+      throw Exception('JWT token not found');
+    }
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/Orders/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get orders for user');
+    }
+  }
+
   Future<void> sendJsonData(List<Order> orders) async {
     final clientId = await ApiService().getCurrentUser();
     final List<Map<String, dynamic>> transformedData = orders.map((order) {

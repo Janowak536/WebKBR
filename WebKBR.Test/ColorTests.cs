@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using WebKBR.API.Controllers;
-using WebKBR.Domain.Models;
 using WebKBR.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
+using WebKBR.Domain.Models;
 
 namespace WebKBR.Test
 {

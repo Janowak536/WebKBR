@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using WebKBR.API.WebKBR.Domain.Models;
 using WebKBR.Domain.Models;
 
 namespace WebKBR.Infrastructure;
@@ -25,6 +26,8 @@ public partial class Db2kbrContext : DbContext
     public virtual DbSet<Model> Models { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -159,6 +162,19 @@ public partial class Db2kbrContext : DbContext
                 .HasForeignKey(d => d.ModelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__ModelID__2E1BDC42");
+        });
+
+        modelBuilder.Entity<OrderStatus>(entity =>
+        {
+            entity.HasKey(e => e.OrderStatusId).HasName("PK__OrdersSt__BC674F413A1314AE");
+
+            entity.ToTable("OrderStatus");
+
+            entity.Property(e => e.OrderStatusId).HasColumnName("OrderStatusID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

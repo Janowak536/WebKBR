@@ -26,6 +26,7 @@ class _CartPageState extends State<CartPage> {
       List<dynamic> decodedData = jsonDecode(ordersFromStorage);
       orders = decodedData.map<Order>((item) => Order.fromJson(item)).toList();
     }
+    calculateJsonData();
   }
 
   @override
@@ -71,6 +72,7 @@ class _CartPageState extends State<CartPage> {
                           icon: Icon(Icons.delete),
                           onPressed: () {
                             removeOrder(order);
+                            calculateJsonData();
                           },
                         ),
                       ),
@@ -82,19 +84,9 @@ class _CartPageState extends State<CartPage> {
               ElevatedButton(
                 onPressed: () {
                   sendJsonData();
+                  calculateJsonData();
                 },
                 child: Text('Wyślij Zamówienie'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final apiService = ApiService();
-                  final double calculatedValue =
-                      await apiService.calculateJsonData(orders);
-                  setState(() {
-                    orderValue = calculatedValue;
-                  });
-                },
-                child: Text('Wyceń zamówienie'),
               ),
               if (orderValue > 0) SizedBox(height: 20),
               Container(
@@ -151,6 +143,7 @@ class _CartPageState extends State<CartPage> {
         window.localStorage['orders'] = jsonEncode(orders
             .map<Map<String, dynamic>>((order) => order.toJson())
             .toList());
+        calculateJsonData();
       }
     });
   }
@@ -162,6 +155,10 @@ class _CartPageState extends State<CartPage> {
 
   void calculateJsonData() async {
     final apiService = ApiService();
-    await apiService.calculateJsonData(orders);
+    await apiService.calculateJsonData(orders).then((value) {
+      setState(() {
+        orderValue = value;
+      });
+    });
   }
 }
