@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using WebKBR.API.WebKBR.Domain.Models;
 using WebKBR.Domain.Dto;
 using WebKBR.Domain.Models;
 using WebKBR.Infrastructure;
@@ -27,22 +28,39 @@ namespace WebKBR.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            // Generowanie jednego losowego OrderId dla całej listy zamówień
             var orderId = GenerateOrderId();
+            decimal totalOrderValue = 0;
 
-            var orders = orderDtos.Select(orderDto => new Order
+            var orders = orderDtos.Select(orderDto =>
             {
-                ClientId = orderDto.ClientID,
-                OrderId = orderId,
-                ModelId = orderDto.ModelID,
-                ColorId = orderDto.ColorID,
-                MdfId = orderDto.MdfID,
-                Width = orderDto.Width,
-                Height = orderDto.Height,
-                OrderValue = orderDto.OrderValue
+                var order = new Order
+                {
+                    ClientId = orderDto.ClientID,
+                    OrderId = orderId,
+                    ModelId = orderDto.ModelID,
+                    ColorId = orderDto.ColorID,
+                    MdfId = orderDto.MdfID,
+                    Width = orderDto.Width,
+                    Height = orderDto.Height
+                };
+
+                var orderValue = GetOrderValue(order);
+                if (orderValue == null)
+                {
+                    throw new InvalidOperationException("Invalid order data");
+                }
+
+                totalOrderValue += orderValue.Value;
+                return order;
             }).ToList();
 
+            var orderStatus = new OrderStatus
+            {
+                OrderId = orderId,
+                Status = "New",
+                OrderValue = totalOrderValue
+            };
+            _context.OrderStatuses.Add(orderStatus);
             _context.Orders.AddRange(orders);
             _context.SaveChanges();
 
@@ -51,10 +69,30 @@ namespace WebKBR.API.Controllers
 
         private int GenerateOrderId()
         {
-            // Generowanie losowego OrderId
             Random random = new Random();
             return random.Next(1000, 9999);
         }
+
+        [HttpGet]
+        public IActionResult GetOrders()
+        {
+            var orders = _context.Orders.ToList();
+            return Ok(orders);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetOrder(int id)
+        {
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
+        }
+
+
         [HttpPost("CalculateOrderValue")]
         public IActionResult CalculateOrderValue([FromBody] List<OrderDto> orderDtos)
         {
@@ -71,8 +109,7 @@ namespace WebKBR.API.Controllers
                     ColorId = orderDto.ColorID,
                     MdfId = orderDto.MdfID,
                     Width = orderDto.Width,
-                    Height = orderDto.Height,
-                    OrderValue = orderDto.OrderValue
+                    Height = orderDto.Height
                 };
 
                 decimal? orderValue = GetOrderValue(order);
@@ -81,7 +118,6 @@ namespace WebKBR.API.Controllers
                     return BadRequest("Invalid order data");
                 }
 
-                order.OrderValue = orderValue.Value;
                 orders.Add(order);
                 totalValue += orderValue.Value;
             }

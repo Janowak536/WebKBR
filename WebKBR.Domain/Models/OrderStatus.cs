@@ -10,4 +10,6 @@ public partial class OrderStatus
     public int OrderId { get; set; }
 
     public string? Status { get; set; }
+
+    public decimal? OrderValue { get; set; }
 }

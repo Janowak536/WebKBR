@@ -21,7 +21,6 @@ public partial class Order
 
     public short Height { get; set; }
 
-    public decimal OrderValue { get; set; }
 
     public virtual Client Client { get; set; } = null!;
 

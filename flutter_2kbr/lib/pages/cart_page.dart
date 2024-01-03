@@ -66,7 +66,7 @@ class _CartPageState extends State<CartPage> {
                             ? Icons.event_seat
                             : Icons.border_all),
                         title: Text(
-                          'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
+                          'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}, type: ${order.color}',
                         ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),

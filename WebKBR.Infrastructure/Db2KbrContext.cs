@@ -133,7 +133,7 @@ public partial class Db2kbrContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Orders__B40CC6ED476D7E2C");
+            entity.HasKey(e => e.ProductId).HasName("PK__Orders__B40CC6EDA191E796");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
@@ -141,37 +141,37 @@ public partial class Db2kbrContext : DbContext
             entity.Property(e => e.MdfId).HasColumnName("MdfID");
             entity.Property(e => e.ModelId).HasColumnName("ModelID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
-            entity.Property(e => e.OrderValue).HasColumnType("decimal(20, 2)");
 
             entity.HasOne(d => d.Client).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__ClientID__2D27B809");
+                .HasConstraintName("FK__Orders__ClientID__619B8048");
 
             entity.HasOne(d => d.Color).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ColorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__ColorID__2F10007B");
+                .HasConstraintName("FK__Orders__ColorID__6383C8BA");
 
             entity.HasOne(d => d.Mdf).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.MdfId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__MdfID__300424B4");
+                .HasConstraintName("FK__Orders__MdfID__6477ECF3");
 
             entity.HasOne(d => d.Model).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ModelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__ModelID__2E1BDC42");
+                .HasConstraintName("FK__Orders__ModelID__628FA481");
         });
 
         modelBuilder.Entity<OrderStatus>(entity =>
         {
-            entity.HasKey(e => e.OrderStatusId).HasName("PK__OrdersSt__BC674F413A1314AE");
+            entity.HasKey(e => e.OrderStatusId).HasName("PK__OrderSta__BC674F41B9E1236F");
 
             entity.ToTable("OrderStatus");
 
             entity.Property(e => e.OrderStatusId).HasColumnName("OrderStatusID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.OrderValue).HasColumnType("decimal(20, 2)");
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .IsUnicode(false);

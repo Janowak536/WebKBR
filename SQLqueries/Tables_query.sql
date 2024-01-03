@@ -44,14 +44,10 @@ CREATE table Orders (
 	MdfID int NOT NULL FOREIGN KEY REFERENCES MDF(mdfID),
 	Width smallint NOT NULL,
 	Height smallint NOT NULL,
-	OrderValue decimal(20,2) NOT NULL
-	--constraint widht_check
-		--check(width > 0 and width < 1250)
-	--constraint height_check
-		--check(height > 0 and height < 2750)
 )
 CREATE TABLE OrderStatus (
     OrderStatusID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
     OrderID int NOT NULL,
-    Status varchar(50)
+    Status varchar(50),
+	OrderValue decimal(20,2) NOT NULL
 );

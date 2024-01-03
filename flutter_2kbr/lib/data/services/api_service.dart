@@ -212,7 +212,6 @@ class ApiService {
         'mdfID': order.mdfId,
         'width': order.width,
         'height': order.height,
-        'orderValue': 0,
       };
     }).toList();
 
@@ -252,7 +251,6 @@ class ApiService {
         'mdfID': order.mdfId,
         'width': order.width,
         'height': order.height,
-        'orderValue': 0,
       };
     }).toList();
 
