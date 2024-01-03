@@ -57,7 +57,7 @@ namespace WebKBR.API.Controllers
             var orderStatus = new OrderStatus
             {
                 OrderId = orderId,
-                Status = "New",
+                Status = "Nowe",
                 OrderValue = totalOrderValue
             };
             _context.OrderStatuses.Add(orderStatus);
@@ -127,16 +127,108 @@ namespace WebKBR.API.Controllers
 
         private decimal? GetOrderValue(Order order)
         {
+
             var modelValue = _context.Models.FirstOrDefault(m => m.ModelId == order.ModelId)?.Value;
             var colorValue = _context.Colors.FirstOrDefault(c => c.ColorId == order.ColorId)?.Value;
             var mdfValue = _context.Mdfs.FirstOrDefault(m => m.MdfId == order.MdfId)?.Value;
+            decimal? sum = 0;
+            if (order.MdfId == 1 || order.MdfId == 2)
+            {
+                sum =  (modelValue + colorValue) * (order.Width * order.Height)/1000000;
+            }
+            else
+            {
+                sum = (order.Width * order.Height) * mdfValue / 1000000;
+            }
 
             if (modelValue == null || colorValue == null || mdfValue == null)
             {
                 return null;
             }
 
-            return modelValue * colorValue * mdfValue * order.Width * order.Height;
+            return sum;
         }
+        [HttpDelete("item/{productId}")]
+        public IActionResult DeleteOrderItem(int productId)
+        {
+            var orderItem = _context.Orders.FirstOrDefault(o => o.ProductId == productId);
+            if (orderItem == null)
+            {
+                return NotFound();
+            }
+
+            int orderId = orderItem.OrderId;
+            _context.Orders.Remove(orderItem);
+            _context.SaveChanges();
+
+            if (!_context.Orders.Any(o => o.OrderId == orderId))
+            {
+                var orderStatus = _context.OrderStatuses.FirstOrDefault(os => os.OrderId == orderId);
+                if (orderStatus != null)
+                {
+                    orderStatus.Status = "Usunięte";
+                    _context.SaveChanges();
+                }
+            }
+
+            return Ok();
+        }
+        [HttpDelete("{orderId}")]
+        public IActionResult DeleteOrder(int orderId)
+        {
+            var order = _context.Orders.Where(o => o.OrderId == orderId).ToList();
+            var orderStatus = _context.OrderStatuses.FirstOrDefault(os => os.OrderId == orderId);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            
+            if (orderStatus != null)
+            {
+                orderStatus.Status = "Usunięte";
+            }
+
+            _context.Orders.RemoveRange(order);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpPut("status/{orderId}")]
+        public IActionResult UpdateOrderStatus(int orderId, [FromBody] string status)
+        {
+            var orderStatus = _context.OrderStatuses.FirstOrDefault(os => os.OrderId == orderId);
+            if (orderStatus == null)
+            {
+                return NotFound();
+            }
+
+            orderStatus.Status = status;
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpGet("status/{orderId}")]
+        public IActionResult GetOrderStatusAndValue(int orderId)
+        {
+            var orderStatus = _context.OrderStatuses
+                .Where(os => os.OrderId == orderId)
+                .Select(os => new
+                {
+                    os.OrderId,
+                    os.Status,
+                    os.OrderValue
+                })
+                .FirstOrDefault();
+
+            if (orderStatus == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(orderStatus);
+        }
+
     }
 }

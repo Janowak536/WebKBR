@@ -13,7 +13,6 @@ class FrontSizePage extends StatefulWidget {
   Order order;
 
   FrontSizePage({Key? key, required this.order}) : super(key: key) {
-    // Set the default mdfId to 1 if not already set
     if (order.mdfId == null || order.mdfId == 0) {
       order.mdfId = 1;
     }
@@ -28,10 +27,8 @@ class _FrontSizePageState extends State<FrontSizePage> {
   TextEditingController widthController = TextEditingController();
   List<Order> orders = [];
   List<Mdf> mdfItems = [
-    Mdf(id: 1, name: '19 Finsa Wilgocioodporna'),
-    Mdf(id: 2, name: '22 Finsa Wilgocioodporna'),
-    Mdf(id: 3, name: '25 Finsa Wilgocioodporna'),
-    Mdf(id: 4, name: '30 Finsa Wilgocioodporna'),
+    Mdf(id: 1, name: 'MDF 18'),
+    Mdf(id: 2, name: 'MDF 28'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -87,7 +84,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text('Wysokość'),
+                              Text('Wysokość w mm'),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.2,
                                 child: TextFormField(
@@ -103,7 +100,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text('Szerokość'),
+                              Text('Szerokość w mm'),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.2,
                                 child: TextFormField(
@@ -132,6 +129,10 @@ class _FrontSizePageState extends State<FrontSizePage> {
                                 Order newOrder = widget.order.copyWith(
                                     height: height,
                                     width: width,
+                                    mdf: mdfItems
+                                        .firstWhere((item) =>
+                                            item.id == widget.order.mdfId)
+                                        .name,
                                     type: "front");
                                 addOrderToList(newOrder);
                                 heightController.clear();
@@ -171,7 +172,7 @@ class _FrontSizePageState extends State<FrontSizePage> {
                     child: ListTile(
                       leading: Icon(Icons.event_seat),
                       title: Text(
-                        'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
+                        'MODEL: ${order.model}, MDF: ${order.mdf}, KOLOR: ${order.color}, WYSOKOŚĆ: ${order.height}, SZEROKOŚĆ: ${order.width}',
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.delete),

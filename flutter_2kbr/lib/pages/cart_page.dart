@@ -66,7 +66,7 @@ class _CartPageState extends State<CartPage> {
                             ? Icons.event_seat
                             : Icons.border_all),
                         title: Text(
-                          'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}, type: ${order.color}',
+                          'MODEL: ${order.model}, MDF: ${order.mdf}, KOLOR: ${order.color}, WYSOKOŚĆ: ${order.height}, SZEROKOŚĆ: ${order.width}',
                         ),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
@@ -82,11 +82,14 @@ class _CartPageState extends State<CartPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 onPressed: () {
                   sendJsonData();
-                  calculateJsonData();
                 },
-                child: Text('Wyślij Zamówienie'),
+                child: Text(
+                  'Złóż zamówienie',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               if (orderValue > 0) SizedBox(height: 20),
               Container(
@@ -96,7 +99,7 @@ class _CartPageState extends State<CartPage> {
                 ),
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  'Wycena zamówienia: ${orderValue.toStringAsFixed(2)}',
+                  'Wycena zamówienia: ${orderValue.toStringAsFixed(2)}zł',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -150,7 +153,23 @@ class _CartPageState extends State<CartPage> {
 
   void sendJsonData() async {
     final apiService = ApiService();
-    await apiService.sendJsonData(orders);
+    bool success = await apiService.sendJsonData(orders);
+
+    if (success) {
+      setState(() {
+        orders.clear();
+        orderValue = 0;
+        totalValue = 0;
+        window.localStorage.remove('orders');
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Zamówienie wysłane pomyślnie!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Wysłanie zamówienia nie powiodło się.')),
+      );
+    }
   }
 
   void calculateJsonData() async {

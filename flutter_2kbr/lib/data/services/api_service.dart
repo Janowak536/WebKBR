@@ -201,8 +201,11 @@ class ApiService {
     }
   }
 
-  Future<void> sendJsonData(List<Order> orders) async {
+  Future<bool> sendJsonData(List<Order> orders) async {
     final clientId = await ApiService().getCurrentUser();
+    if (orders.isEmpty) {
+      return false;
+    }
     final List<Map<String, dynamic>> transformedData = orders.map((order) {
       return {
         'clientID': clientId,
@@ -228,15 +231,15 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        // Sukces - dane zostały pomyślnie wysłane do Twojego API
         print('Dane zostały wysłane pomyślnie.');
+        return true;
       } else {
-        // Wystąpił błąd podczas wysyłania danych do Twojego API
         print('Wystąpił błąd podczas wysyłania danych: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
-      // Wystąpił błąd podczas komunikacji z Twoim API
       print('Wystąpił błąd podczas komunikacji z API: $e');
+      return false;
     }
   }
 
@@ -278,6 +281,57 @@ class ApiService {
     } catch (e) {
       print('Wystąpił błąd podczas komunikacji z API: $e');
       return 0.0;
+    }
+  }
+
+  Future<bool> updateOrderStatus(int orderId, String status) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/api/Orders/status/$orderId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(status),
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> deleteOrderItem(int productId) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/Orders/item/$productId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<bool> deleteOrder(int orderId) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/Orders/$orderId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<dynamic> getOrderStatusAndValue(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jwt = prefs.getString('jwt');
+    if (jwt == null) {
+      throw Exception('JWT token not found');
+    }
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/Orders/status/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get orders for user');
     }
   }
 }

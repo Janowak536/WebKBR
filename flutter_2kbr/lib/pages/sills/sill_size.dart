@@ -12,7 +12,11 @@ import 'package:provider/provider.dart';
 class SillSizePage extends StatefulWidget {
   Order order;
 
-  SillSizePage({required this.order});
+  SillSizePage({Key? key, required this.order}) : super(key: key) {
+    if (order.mdfId == null || order.mdfId == 0) {
+      order.mdfId = 7;
+    }
+  }
 
   @override
   _SillSizePageState createState() => _SillSizePageState();
@@ -23,12 +27,12 @@ class _SillSizePageState extends State<SillSizePage> {
   TextEditingController widthController = TextEditingController();
   List<Order> orders = [];
   List<Mdf> mdfItems = [
-    Mdf(id: 1, name: '18'),
-    Mdf(id: 4, name: '19'),
-    Mdf(id: 6, name: '22'),
-    Mdf(id: 1, name: '25'),
-    Mdf(id: 1, name: '28'),
-    Mdf(id: 1, name: '30'),
+    Mdf(id: 7, name: 'MDF 18'),
+    Mdf(id: 8, name: 'MDF 28'),
+    Mdf(id: 3, name: 'Finsa Wilgocioodporna 19'),
+    Mdf(id: 4, name: 'MDF 22'),
+    Mdf(id: 5, name: 'Finsa Wilgocioodporna 25'),
+    Mdf(id: 6, name: 'Finsa Wilgocioodporna 30'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,7 @@ class _SillSizePageState extends State<SillSizePage> {
                               DropdownButton<Mdf>(
                                 value: mdfItems.firstWhere(
                                   (item) => item.id == widget.order.mdfId,
-                                  orElse: () => mdfItems[0],
+                                  orElse: () => mdfItems.first,
                                 ),
                                 onChanged: (Mdf? newValue) {
                                   if (newValue != null) {
@@ -129,6 +133,10 @@ class _SillSizePageState extends State<SillSizePage> {
                                 Order newOrder = widget.order.copyWith(
                                     height: height,
                                     width: width,
+                                    mdf: mdfItems
+                                        .firstWhere((item) =>
+                                            item.id == widget.order.mdfId)
+                                        .name,
                                     type: "parapet");
                                 addOrderToList(newOrder);
                                 heightController.clear();
@@ -167,7 +175,7 @@ class _SillSizePageState extends State<SillSizePage> {
                     child: ListTile(
                       leading: Icon(Icons.border_all),
                       title: Text(
-                        'modelId: ${order.modelId}, colorId: ${order.colorId}, mdfId: ${order.mdfId}, height: ${order.height}, width: ${order.width}, type: ${order.type}',
+                        'MODEL: ${order.model}, MDF: ${order.mdf}, KOLOR: ${order.color}, WYSOKOŚĆ: ${order.height}, SZEROKOŚĆ: ${order.width}',
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.delete),
@@ -218,16 +226,7 @@ class _SillSizePageState extends State<SillSizePage> {
   }
 
   void removeOrderFromList(Order order) {
-    orders.removeWhere((o) =>
-        o.model == order.model &&
-        o.color == order.color &&
-        o.mdf == order.mdf &&
-        o.height == order.height &&
-        o.width == order.width &&
-        o.type == order.type &&
-        o.modelId == order.modelId &&
-        o.colorId == order.colorId &&
-        o.mdfId == order.mdfId);
+    orders.remove(order);
   }
 
   List<Order> getOrdersFromStorage() {
