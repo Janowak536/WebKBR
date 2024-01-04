@@ -168,9 +168,17 @@ class _HomePageState extends State<HomePage> {
                                       elevation: 0.0,
                                       backgroundColor:
                                           Colors.red.withOpacity(0)),
-                                  onPressed: () {
-                                    navigateWithoutAnimation(
-                                        context, SillModelPage());
+                                  onPressed: () async {
+                                    final authProvider =
+                                        Provider.of<AuthProvider>(context,
+                                            listen: false);
+                                    if (authProvider.isLoggedIn) {
+                                      await navigateWithoutAnimation(
+                                          context, SillModelPage());
+                                    } else {
+                                      await navigateWithoutAnimation(
+                                          context, LoginPage());
+                                    }
                                   },
                                   child: Text(
                                     'Parapety',
@@ -202,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 50), // Dodaje odstęp pomiędzy kolumnami
+                    SizedBox(width: 50),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -225,9 +233,17 @@ class _HomePageState extends State<HomePage> {
                                       elevation: 0.0,
                                       backgroundColor:
                                           Colors.red.withOpacity(0)),
-                                  onPressed: () {
-                                    navigateWithoutAnimation(
-                                        context, FrontModelPage());
+                                  onPressed: () async {
+                                    final authProvider =
+                                        Provider.of<AuthProvider>(context,
+                                            listen: false);
+                                    if (authProvider.isLoggedIn) {
+                                      await navigateWithoutAnimation(
+                                          context, FrontModelPage());
+                                    } else {
+                                      await navigateWithoutAnimation(
+                                          context, LoginPage());
+                                    }
                                   },
                                   child: const Text('Bogaty katalog frontów',
                                       style: TextStyle(
@@ -410,9 +426,8 @@ class _HomePageState extends State<HomePage> {
                     height: 90,
                     width: 100,
                     child: Image.asset(
-                      'assets/images/home8.png', // Ścieżka do obrazka
-                      fit: BoxFit
-                          .fill, // Dopasowanie obrazka do rozmiaru kontenera
+                      'assets/images/home8.png',
+                      fit: BoxFit.fill,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -446,9 +461,8 @@ class _HomePageState extends State<HomePage> {
                     height: 90,
                     width: 100,
                     child: Image.asset(
-                      'assets/images/home7.png', // Ścieżka do obrazka
-                      fit: BoxFit
-                          .fill, // Dopasowanie obrazka do rozmiaru kontenera
+                      'assets/images/home7.png',
+                      fit: BoxFit.fill,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -482,9 +496,8 @@ class _HomePageState extends State<HomePage> {
                     height: 90,
                     width: 100,
                     child: Image.asset(
-                      'assets/images/home6.png', // Ścieżka do obrazka
-                      fit: BoxFit
-                          .fill, // Dopasowanie obrazka do rozmiaru kontenera
+                      'assets/images/home6.png',
+                      fit: BoxFit.fill,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -518,9 +531,8 @@ class _HomePageState extends State<HomePage> {
                     height: 90,
                     width: 100,
                     child: Image.asset(
-                      'assets/images/home5.png', // Ścieżka do obrazka
-                      fit: BoxFit
-                          .fill, // Dopasowanie obrazka do rozmiaru kontenera
+                      'assets/images/home5.png',
+                      fit: BoxFit.fill,
                     ),
                   ),
                   SizedBox(height: 10),

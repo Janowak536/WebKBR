@@ -110,7 +110,7 @@ class _AboutPageState extends State<AboutPage> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/images/logo2.jpg'),
-                            fit: BoxFit.scaleDown, // Zmieniony na BoxFit.fill
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                       ),

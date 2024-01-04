@@ -158,7 +158,11 @@ namespace WebKBR.API.Controllers
             {
                 return null;
             }
-
+            var client = _context.Clients.FirstOrDefault(c => c.ClientId == order.ClientId);
+            if (client != null && client.DiscountCode == "kod")
+            {
+                sum *= 0.80m; 
+            }
             return sum;
         }
         [HttpDelete("item/{productId}")]

@@ -233,7 +233,7 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
           ..sort((a, b) => a.key.compareTo(b.key)),
       );
     } catch (e) {
-      print('Error fetching orders: $e');
+      print('Błąd podczas pobierania zamówień $e');
     }
 
     if (mounted) {

@@ -5,7 +5,9 @@ import 'package:flutter_2kbr/pages/home_page.dart';
 import 'package:flutter_2kbr/pages/signinorsignup/login_page.dart';
 import 'package:flutter_2kbr/pages/offer_page.dart';
 import 'package:flutter_2kbr/pages/sills/sill_model_page.dart';
+import 'package:flutter_2kbr/providers/auth_provider.dart';
 import 'package:flutter_2kbr/widgets/navigate_animation.dart';
+import 'package:provider/provider.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -73,8 +75,14 @@ class Footer extends StatelessWidget {
               ),
               Flexible(
                 child: TextButton(
-                  onPressed: () {
-                    navigateWithoutAnimation(context, OfferPage());
+                  onPressed: () async {
+                    final authProvider =
+                        Provider.of<AuthProvider>(context, listen: false);
+                    if (authProvider.isLoggedIn) {
+                      await navigateWithoutAnimation(context, OfferPage());
+                    } else {
+                      await navigateWithoutAnimation(context, LoginPage());
+                    }
                   },
                   child: const Text(
                     'Oferta',

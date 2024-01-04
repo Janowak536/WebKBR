@@ -20,8 +20,7 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
       child: Scaffold(
         appBar: CustomAppBar(
           onActionPressed: () => authProvider.isLoggedIn

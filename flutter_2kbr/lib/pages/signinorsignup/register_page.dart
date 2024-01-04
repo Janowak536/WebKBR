@@ -60,8 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Colors.grey.shade300,
               ),
               padding: EdgeInsets.all(40),
-              height:
-                  MediaQuery.of(context).size.height * 0.8, // Updated height
+              height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.6,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
@@ -83,11 +82,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _nipController,
                                 ],
                                 [
-                                  'Username',
-                                  'Password',
-                                  'Confirm Password',
-                                  'Name',
-                                  'NIP'
+                                  'Nazwa użytkownika',
+                                  'Hasło',
+                                  'Potwierdź hasło',
+                                  'Imię',
+                                  'NIP',
                                 ],
                               ),
                             ),
@@ -105,10 +104,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ],
                                 [
                                   'Email',
-                                  'Phone',
-                                  'Address',
-                                  'City',
-                                  'Postal Code'
+                                  'Telefon',
+                                  'Adres',
+                                  'Miasto',
+                                  'Kod pocztowy'
                                 ],
                               ),
                             ),
@@ -126,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: Text(
                         'Zarejestruj',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     SizedBox(height: 8),
@@ -134,7 +133,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () {
                         navigateWithoutAnimation(context, LoginPage());
                       },
-                      child: const Text('Sign In'),
+                      child: const Text(
+                        'Zaloguj',
+                        style: TextStyle(fontSize: 15, color: Colors.orange),
+                      ),
                     ),
                   ],
                 ),
@@ -151,6 +153,8 @@ class _RegisterPageState extends State<RegisterPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List<Widget>.generate(controllers.length, (index) {
+        bool isPasswordField =
+            (labels[index] == 'Hasło' || labels[index] == 'Potwierdź hasło');
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -163,6 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
               labelText: labels[index],
               border: UnderlineInputBorder(),
             ),
+            obscureText: isPasswordField,
           ),
         );
       }),
@@ -172,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _performLogin() async {
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Passwords do not match')),
+        SnackBar(content: Text('Hasła są różne')),
       );
       return;
     }
@@ -189,7 +194,6 @@ class _RegisterPageState extends State<RegisterPage> {
         city: _cityController.text,
         postalCode: _postalCodeController.text,
       );
-      print(jsonEncode(newUser.toJson()));
       await ApiService().register(newUser);
 
       String jwt = await ApiService().login(
@@ -205,7 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registration and login successfully')),
+        SnackBar(content: Text('Rejestracja i logowanie przebiegły pomyślnie')),
       );
 
       await navigateWithoutAnimation(context, HomePage());
@@ -215,7 +219,7 @@ class _RegisterPageState extends State<RegisterPage> {
       print(e);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to Register/Login')),
+        SnackBar(content: Text('Błąd podczas rejestracji')),
       );
     }
   }

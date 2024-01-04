@@ -70,28 +70,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       onPressed: () async => await navigateWithoutAnimation(
                           context, ClientEditPage()),
                     ),
-                  IconButton(
-                    color: Colors.white,
-                    tooltip: 'Zamówienia',
-                    icon: Icon(Icons.shopping_bag),
-                    onPressed: () async => await navigateWithoutAnimation(
-                        context, ClientOrderPage()),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.shopping_cart),
-                    tooltip: 'Koszyk',
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              CartPage(),
-                          transitionDuration: Duration(seconds: 0),
-                        ),
-                      );
-                    },
-                  ),
+                  if (isLoggedIn)
+                    IconButton(
+                      color: Colors.white,
+                      tooltip: 'Zamówienia',
+                      icon: Icon(Icons.shopping_bag),
+                      onPressed: () async => await navigateWithoutAnimation(
+                          context, ClientOrderPage()),
+                    ),
+                  if (isLoggedIn)
+                    IconButton(
+                      icon: Icon(Icons.shopping_cart),
+                      tooltip: 'Koszyk',
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                CartPage(),
+                            transitionDuration: Duration(seconds: 0),
+                          ),
+                        );
+                      },
+                    ),
                   IconButton(
                     onPressed: () {
                       final authProvider =
@@ -134,8 +136,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () async =>
-                        await navigateWithoutAnimation(context, OfferPage()),
+                    onPressed: () async {
+                      final authProvider =
+                          Provider.of<AuthProvider>(context, listen: false);
+                      if (authProvider.isLoggedIn) {
+                        await navigateWithoutAnimation(context, OfferPage());
+                      } else {
+                        await navigateWithoutAnimation(context, LoginPage());
+                      }
+                    },
                     child: Text(
                       'Oferta',
                       style: TextStyle(

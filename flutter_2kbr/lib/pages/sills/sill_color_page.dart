@@ -205,8 +205,7 @@ class _SillColorPageState extends State<SillColorPage> {
     var size = MediaQuery.of(context).size;
     final double horizontalPadding = size.width > 800 ? size.width * 0.2 : 0.9;
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
       child: Scaffold(
         appBar: CustomAppBar(
           onActionPressed: () => authProvider.isLoggedIn
@@ -252,7 +251,7 @@ class _SillColorPageState extends State<SillColorPage> {
                                     SillSizePage(order: updatedOrder),
                             transitionsBuilder: (context, animation,
                                 secondaryAnimation, child) {
-                              return child; // This disables the transition
+                              return child;
                             },
                           ),
                         );

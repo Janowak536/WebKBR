@@ -13,7 +13,7 @@ class ApiService {
     String? jwt = prefs.getString('jwt');
 
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT nie znaleziony');
     }
 
     final response = await http.get(
@@ -30,11 +30,11 @@ class ApiService {
       if (boolValue != null) {
         return boolValue;
       } else {
-        print('Invalid value received for isAdmin: $boolValue');
-        throw Exception('Invalid value received for isAdmin');
+        print('Nieprawidłowa wartość dla isAdmin: $boolValue');
+        throw Exception('Nieprawidłowa wartość dla isAdmin');
       }
     } else {
-      throw Exception('Failed to get the user');
+      throw Exception('Błąd poczas pobierania użytkownika');
     }
   }
 
@@ -53,7 +53,7 @@ class ApiService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to change password');
+      throw Exception('Błąd podczas zmiany hasła');
     }
   }
 
@@ -74,7 +74,6 @@ class ApiService {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('jwt', jsonDecode(response.body)['token']);
 
-        // Pobranie clientId i zapisanie go w SharedPreferences
         final clientId = jsonDecode(response.body)['clientId'];
         if (clientId != null) {
           await prefs.setInt('clientId', clientId);
@@ -83,11 +82,11 @@ class ApiService {
         Map<String, dynamic> json = jsonDecode(response.body);
         return json['token'];
       } else {
-        throw Exception('Failed to login. Error: ${response.body}');
+        throw Exception('Błąd podczas logowania ${response.body}');
       }
     } catch (e) {
-      print('Error: $e');
-      throw Exception('Error occurred while making the request.');
+      print('Błąd $e');
+      throw Exception('Błąd podczas wykonywania zapytania');
     }
   }
 
@@ -103,7 +102,7 @@ class ApiService {
     if (response.statusCode == 201) {
       return true;
     } else {
-      throw Exception('Failed to register. Error: ${response.body}');
+      throw Exception('Błąd podczas rejestracji ${response.body}');
     }
   }
 
@@ -113,7 +112,7 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT token nieznaleziony');
     }
 
     final response = await http.put(
@@ -130,7 +129,7 @@ class ApiService {
     );
 
     if (response.statusCode != 204) {
-      throw Exception('Failed to edit client details');
+      throw Exception('błąd podczas edycji szczegółów klienta');
     }
   }
 
@@ -138,7 +137,7 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT token nieznaleziony');
     }
     final response = await http.get(
       Uri.parse('$baseUrl/api/User/GetCurrentUser'),
@@ -153,11 +152,11 @@ class ApiService {
       if (intValue != null) {
         return intValue;
       } else {
-        print('Invalid value received for userId: $intValue');
-        throw Exception('Invalid value received for userId');
+        print('Błędna wartość $intValue');
+        throw Exception('Błędna wartość dla userId');
       }
     } else {
-      throw Exception('Failed to get the user');
+      throw Exception('Błąd podczas pobierania użytkownika');
     }
   }
 
@@ -165,7 +164,7 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT token nieznaleziony');
     }
     final response = await http.get(
       Uri.parse('$baseUrl/api/Orders'),
@@ -177,7 +176,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to get orders for user');
+      throw Exception('Bład podczas pobierania użytkownika');
     }
   }
 
@@ -197,7 +196,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to get orders for user');
+      throw Exception('Bład podczas pobierania zamówień użytkownika');
     }
   }
 
@@ -205,7 +204,7 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT token nieznaleziony');
     }
     final response = await http.get(
       Uri.parse('$baseUrl/api/Orders/$id'),
@@ -217,7 +216,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to get orders for user');
+      throw Exception('Bład podczas pobierania zamówień użytkownika');
     }
   }
 
@@ -339,7 +338,7 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');
     if (jwt == null) {
-      throw Exception('JWT token not found');
+      throw Exception('JWT token nieznaleziony');
     }
     final response = await http.get(
       Uri.parse('$baseUrl/api/Orders/status/$id'),
@@ -351,7 +350,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to get orders for user');
+      throw Exception('Bład podczas pobierania zamówień użytkownika');
     }
   }
 }

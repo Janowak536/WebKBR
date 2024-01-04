@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.all(15),
                           child: TextField(
                             controller: _usernameController,
-                            decoration: InputDecoration(labelText: 'Username'),
+                            decoration: InputDecoration(labelText: 'Login'),
                           ),
                         ),
                         Container(
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.only(top: 20),
                           child: TextField(
                             controller: _passwordController,
-                            decoration: InputDecoration(labelText: 'Password'),
+                            decoration: InputDecoration(labelText: 'Hasło'),
                             obscureText: true,
                           ),
                         ),
@@ -110,14 +110,14 @@ class _LoginPageState extends State<LoginPage> {
                               .toggleLoginStatus();
                           if (!mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Login successfully')),
+                            SnackBar(content: Text('Zostałeś zalogowany')),
                           );
                           await navigateWithoutAnimation(context, HomePage());
                         } catch (e) {
                           if (!mounted) return;
                           print(e);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Failed to Login')),
+                            SnackBar(content: Text('Błąd podczas logowania')),
                           );
                         }
                       },
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Text(
                         'Zaloguj',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     SizedBox(height: 8),
@@ -137,7 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         await navigateWithoutAnimation(context, RegisterPage());
                       },
-                      child: Text('Sign Up'),
+                      child: Text(
+                        'Zarejestruj się',
+                        style: TextStyle(fontSize: 15, color: Colors.orange),
+                      ),
                     ),
                     SizedBox(height: 8),
                     TextButton(
@@ -145,7 +148,10 @@ class _LoginPageState extends State<LoginPage> {
                         await navigateWithoutAnimation(
                             context, ChangePasswordPage());
                       },
-                      child: Text('Change Password'),
+                      child: Text(
+                        'Zmień hasło',
+                        style: TextStyle(fontSize: 15, color: Colors.orange),
+                      ),
                     ),
                   ],
                 ),

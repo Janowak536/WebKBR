@@ -14,7 +14,7 @@ class _ClientEditPageState extends State<ClientEditPage> {
   final TextEditingController _clientTypeController = TextEditingController();
   final TextEditingController _discountCodeController = TextEditingController();
 
-  final ApiService apiClient = ApiService(); // Add this line
+  final ApiService apiClient = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -28,54 +28,74 @@ class _ClientEditPageState extends State<ClientEditPage> {
           }
         },
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _nipController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Nip',
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          width: MediaQuery.of(context).size.width * 0.8,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: _nipController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  labelText: 'NIP',
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _clientTypeController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Client Type',
+              SizedBox(height: 10),
+              TextField(
+                controller: _clientTypeController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  labelText: 'Typ klienta',
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _discountCodeController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Discount Code',
+              SizedBox(height: 10),
+              TextField(
+                controller: _discountCodeController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(),
+                  labelText: 'Kod rabatowy',
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                print('NIP: ${_nipController.text}');
-                print('Client Type: ${_clientTypeController.text}');
-                print('Discount Code: ${_discountCodeController.text}');
-                try {
-                  await apiClient.editClientDetails(
-                      int.parse(_nipController.text),
-                      _clientTypeController.text,
-                      _discountCodeController.text);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Client details edited successfully')));
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Failed to edit client details: $e')));
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  print('NIP: ${_nipController.text}');
+                  print('Typ klienta: ${_clientTypeController.text}');
+                  print('Kod rabatowy: ${_discountCodeController.text}');
+                  try {
+                    await apiClient.editClientDetails(
+                        int.parse(_nipController.text),
+                        _clientTypeController.text,
+                        _discountCodeController.text);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text('Szczegóły klienta zostały zaktualizowane.')));
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                            'Nie udało się zaktualizować szczegółów klienta: $e')));
+                  }
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                child: Text(
+                  'Zatwierdź',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
