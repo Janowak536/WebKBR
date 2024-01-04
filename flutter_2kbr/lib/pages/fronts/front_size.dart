@@ -86,9 +86,10 @@ class _FrontSizePageState extends State<FrontSizePage> {
                             children: [
                               Text('Wysokość w mm'),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.2,
+                                width: MediaQuery.of(context).size.width * 0.15,
                                 child: TextFormField(
                                   controller: heightController,
+                                  textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: "Wprowadź wysokość",
                                   ),
@@ -102,9 +103,10 @@ class _FrontSizePageState extends State<FrontSizePage> {
                             children: [
                               Text('Szerokość w mm'),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.2,
+                                width: MediaQuery.of(context).size.width * 0.15,
                                 child: TextFormField(
                                   controller: widthController,
+                                  textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: "Wprowadź szerokość",
                                   ),
@@ -121,6 +123,10 @@ class _FrontSizePageState extends State<FrontSizePage> {
                           padding: EdgeInsets.only(top: 10.0),
                           child: ElevatedButton(
                             onPressed: () {
+                              final int? height =
+                                  int.tryParse(heightController.text);
+                              final int? width =
+                                  int.tryParse(widthController.text);
                               setState(() {
                                 final height =
                                     int.tryParse(heightController.text) ?? 0;
@@ -134,10 +140,21 @@ class _FrontSizePageState extends State<FrontSizePage> {
                                             item.id == widget.order.mdfId)
                                         .name,
                                     type: "front");
-                                addOrderToList(newOrder);
-                                heightController.clear();
-                                widthController.clear();
-                                print(jsonEncode(newOrder.toJson()));
+                                if (height == null ||
+                                    width == null ||
+                                    height <= 0 ||
+                                    width <= 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'Wysokość i szerokość musi być wypełniona i większa od zera')),
+                                  );
+                                } else {
+                                  addOrderToList(newOrder);
+                                  heightController.clear();
+                                  widthController.clear();
+                                  print(jsonEncode(newOrder.toJson()));
+                                }
                               });
                             },
                             child: Text(

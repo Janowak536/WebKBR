@@ -92,6 +92,19 @@ namespace WebKBR.API.Controllers
             return Ok(order);
         }
 
+        [HttpGet("client/{id}")]
+        public IActionResult GetOrderByClientId(int id)
+        {
+            var order = _context.Orders.Where(o => o.ClientId == id).ToList();
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
+        }
+
+
 
         [HttpPost("CalculateOrderValue")]
         public IActionResult CalculateOrderValue([FromBody] List<OrderDto> orderDtos)

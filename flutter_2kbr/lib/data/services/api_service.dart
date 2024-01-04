@@ -181,6 +181,26 @@ class ApiService {
     }
   }
 
+  Future<dynamic> getOrderByClientId(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jwt = prefs.getString('jwt');
+    if (jwt == null) {
+      throw Exception('JWT token not found');
+    }
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/Orders/client/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to get orders for user');
+    }
+  }
+
   Future<dynamic> getOrderById(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jwt = prefs.getString('jwt');

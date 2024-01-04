@@ -90,9 +90,10 @@ class _SillSizePageState extends State<SillSizePage> {
                             children: [
                               Text('Wysokość w mm'),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.2,
+                                width: MediaQuery.of(context).size.width * 0.15,
                                 child: TextFormField(
                                   controller: heightController,
+                                  textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: "Wprowadź wysokość",
                                   ),
@@ -106,9 +107,10 @@ class _SillSizePageState extends State<SillSizePage> {
                             children: [
                               Text('Szerokość w mm'),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.2,
+                                width: MediaQuery.of(context).size.width * 0.15,
                                 child: TextFormField(
                                   controller: widthController,
+                                  textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: "Wprowadź szerokość",
                                   ),
@@ -125,6 +127,10 @@ class _SillSizePageState extends State<SillSizePage> {
                           padding: EdgeInsets.only(top: 10.0),
                           child: ElevatedButton(
                             onPressed: () {
+                              final int? height =
+                                  int.tryParse(heightController.text);
+                              final int? width =
+                                  int.tryParse(widthController.text);
                               setState(() {
                                 final height =
                                     int.tryParse(heightController.text) ?? 0;
@@ -138,10 +144,18 @@ class _SillSizePageState extends State<SillSizePage> {
                                             item.id == widget.order.mdfId)
                                         .name,
                                     type: "parapet");
-                                addOrderToList(newOrder);
-                                heightController.clear();
-                                widthController.clear();
-                                print(jsonEncode(newOrder.toJson()));
+                                if (height <= 0 || width <= 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Podaj poprawne wartości')),
+                                  );
+                                } else {
+                                  addOrderToList(newOrder);
+                                  heightController.clear();
+                                  widthController.clear();
+                                  print(jsonEncode(newOrder.toJson()));
+                                }
                               });
                             },
                             child: Text(

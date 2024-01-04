@@ -65,19 +65,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   if (isAdmin)
                     IconButton(
                       color: Colors.white,
+                      tooltip: 'Edycja klienta',
                       icon: Icon(Icons.edit),
                       onPressed: () async => await navigateWithoutAnimation(
                           context, ClientEditPage()),
                     ),
-                  if (isAdmin)
-                    IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.online_prediction_rounded),
-                      onPressed: () async => await navigateWithoutAnimation(
-                          context, ClientOrderPage()),
-                    ),
+                  IconButton(
+                    color: Colors.white,
+                    tooltip: 'Zamówienia',
+                    icon: Icon(Icons.shopping_bag),
+                    onPressed: () async => await navigateWithoutAnimation(
+                        context, ClientOrderPage()),
+                  ),
                   IconButton(
                     icon: Icon(Icons.shopping_cart),
+                    tooltip: 'Koszyk',
                     color: Colors.white,
                     onPressed: () {
                       Navigator.pushReplacement(
@@ -111,7 +113,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     icon: Icon(isLoggedIn ? Icons.logout : Icons.login),
                     color: Colors.white,
                     iconSize: 35,
-                    tooltip: isLoggedIn ? 'Logout' : 'Login',
+                    tooltip: isLoggedIn ? 'Wyloguj' : 'Zaloguj',
                   )
                 ],
               ),

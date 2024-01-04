@@ -24,10 +24,12 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
   ];
   Map<int, String> _selectedStatuses = {};
   Map<int, dynamic> _orderStatusAndValues = {};
+  bool _isAdmin = false;
 
   @override
   void initState() {
     super.initState();
+    _checkAdminStatus();
     _fetchOrders();
   }
 
@@ -47,20 +49,30 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _orderIdController,
-                    decoration: InputDecoration(hintText: 'Enter Order ID'),
-                    keyboardType: TextInputType.number,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.2,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _orderIdController,
+                      textAlign: TextAlign.center,
+                      decoration:
+                          InputDecoration(hintText: 'Podaj numer zamówienia'),
+                      keyboardType: TextInputType.number,
+                    ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: _filterOrders,
-                  child: Text('Search'),
-                ),
-              ],
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange),
+                    onPressed: _filterOrders,
+                    child: Text(
+                      'Szukaj',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -81,11 +93,11 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
                             int orderId = entry.key;
                             String status = _orderStatusAndValues[orderId]
                                     ?['status'] ??
-                                'Status not found';
+                                'Brak';
                             String value = _orderStatusAndValues[orderId]
                                         ?['orderValue']
                                     ?.toString() ??
-                                'Value not found';
+                                'Brak';
                             _selectedStatuses.putIfAbsent(
                                 orderId, () => orderStatuses[0]);
 
@@ -97,43 +109,57 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(
-                                          child: Text('Order ID: $orderId')),
-                                      Text('Status: $status'),
-                                      Text('Value: $value'),
-                                      DropdownButton<String>(
-                                        value: _selectedStatuses[orderId],
-                                        onChanged: (String? newValue) {
-                                          if (newValue != null) {
-                                            setState(() {
-                                              _selectedStatuses[orderId] =
-                                                  newValue;
-                                            });
-                                          }
-                                        },
-                                        items: orderStatuses
-                                            .map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            _updateOrderStatus(orderId),
-                                        child: Text('Zmień status'),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.delete),
-                                        onPressed: () => _deleteOrder(orderId),
-                                      ),
+                                      Text('NUMER ZAMÓWIENIA: $orderId ',
+                                          style: TextStyle(fontSize: 16)),
+                                      Spacer(),
+                                      if (_isAdmin) ...[
+                                        DropdownButton<String>(
+                                          value: _selectedStatuses[orderId],
+                                          onChanged: (String? newValue) {
+                                            if (newValue != null) {
+                                              setState(() {
+                                                _selectedStatuses[orderId] =
+                                                    newValue;
+                                              });
+                                            }
+                                          },
+                                          items: orderStatuses
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.orange),
+                                          onPressed: () =>
+                                              _updateOrderStatus(orderId),
+                                          child: Text(
+                                            'Zmień status',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.delete),
+                                          onPressed: () =>
+                                              _deleteOrder(orderId),
+                                        ),
+                                      ],
                                     ],
                                   ),
+                                  Text('STATUS: $status ',
+                                      style: TextStyle(fontSize: 16)),
+                                  Text('WARTOŚĆ: $value zł ',
+                                      style: TextStyle(fontSize: 16)),
                                   ...entry.value.map((orderItem) {
                                     int productId = orderItem['productId'];
                                     int clientId = orderItem['clientId'] ?? 0;
@@ -145,12 +171,14 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
 
                                     return ListTile(
                                       title: Text(
-                                          'productId: $productId clientId: $clientId modelId: $modelId colorId: $colorId mdfId: $mdfId width: $width height: $height '),
-                                      trailing: IconButton(
-                                        icon: Icon(Icons.delete),
-                                        onPressed: () =>
-                                            _deleteOrderItem(productId),
-                                      ),
+                                          'Id produktu: $productId Id klienta: $clientId Id modelu: $modelId Id koloru: $colorId Id mdf: $mdfId szerokość: $width wysokość: $height '),
+                                      trailing: _isAdmin
+                                          ? IconButton(
+                                              icon: Icon(Icons.delete),
+                                              onPressed: () =>
+                                                  _deleteOrderItem(productId),
+                                            )
+                                          : null,
                                     );
                                   }).toList(),
                                 ],
@@ -176,36 +204,30 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
     });
 
     try {
-      var allOrders = await apiClient.getOrder();
+      bool isAdminUser = await apiClient.isAdmin();
+      int clientId = await apiClient.getCurrentUser();
+
+      var orders = isAdminUser
+          ? await apiClient.getOrder()
+          : await apiClient.getOrderByClientId(clientId);
+
       var statusAndValueFutures = <Future>[];
 
-      for (var order in allOrders) {
+      for (var order in orders) {
         _originalOrders.putIfAbsent(order['orderId'], () => []).add(order);
-
-        // Fetch the status and value for each order and add it to the _orderStatusAndValues map
-        var future = apiClient.getOrderStatusAndValue(order['orderId']).then(
-          (statusAndValue) {
-            print(
-                'Fetched status and value for order ID ${order['orderId']}: $statusAndValue'); // Debug print
-            if (statusAndValue != null) {
-              _orderStatusAndValues[order['orderId']] = statusAndValue;
-              // Print each order with its status to the console
-              print('Order ID: ${order['orderId']}, '
-                  'Status: ${statusAndValue['status']}, ' // Ensure the key is correct
-                  'Value: ${statusAndValue['orderValue']}'); // Ensure the key is correct
-            } else {
-              print(
-                  'Status and value for order ID ${order['orderId']} are null');
-            }
-          },
+        statusAndValueFutures.add(
+          apiClient.getOrderStatusAndValue(order['orderId']).then(
+            (statusAndValue) {
+              if (statusAndValue != null) {
+                _orderStatusAndValues[order['orderId']] = statusAndValue;
+              }
+            },
+          ),
         );
-        statusAndValueFutures.add(future);
       }
 
-      // Wait for all the futures to complete
       await Future.wait(statusAndValueFutures);
 
-      // Sort the orders by orderId
       _displayedOrders = Map.fromEntries(
         _originalOrders.entries.toList()
           ..sort((a, b) => a.key.compareTo(b.key)),
@@ -235,6 +257,13 @@ class _ClientOrderPageState extends State<ClientOrderPage> {
         _displayedOrders = Map.from(_originalOrders);
       });
     }
+  }
+
+  void _checkAdminStatus() async {
+    bool isAdmin = await apiClient.isAdmin();
+    setState(() {
+      _isAdmin = isAdmin;
+    });
   }
 
   void _updateOrderStatus(int orderId) async {
